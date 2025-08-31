@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-EmergentSystem.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Uni Subjects\2025 - Sem 2\SGD240 - Game Coding\SGD240_EmergentBehaviour\EmergentSystem\Intermediate\Build\Win64\x64\EmergentSystemEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj"
+"C:\Uni Subjects\2025 - Sem 2\SGD240 - Game Coding\SGD240_EmergentBehaviour\EmergentSystem\Intermediate\Build\Win64\x64\UnrealEditor\Development\EmergentSystem\EmergentSystem.cpp.obj"
+"C:\Uni Subjects\2025 - Sem 2\SGD240 - Game Coding\SGD240_EmergentBehaviour\EmergentSystem\Intermediate\Build\Win64\x64\UnrealEditor\Development\EmergentSystem\Default.rc2.res"
+/OUT:"C:\Uni Subjects\2025 - Sem 2\SGD240 - Game Coding\SGD240_EmergentBehaviour\EmergentSystem\Intermediate\Build\Win64\x64\UnrealEditor\Development\EmergentSystem\UnrealEditor-EmergentSystem.lib"

@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\uni subjects\\2025 - sem 2\\sgd240 - game coding\\sgd240_emergentbehaviour\\emergentsystem\\source\\emergentsystem\\emergentsystem.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\uni subjects\\2025 - sem 2\\sgd240 - game coding\\sgd240_emergentbehaviour\\emergentsystem\\intermediate\\build\\win64\\x64\\emergentsystemeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\uni subjects\\2025 - sem 2\\sgd240 - game coding\\sgd240_emergentbehaviour\\emergentsystem\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\emergentsystem\\definitions.emergentsystem.h",
+            "c:\\uni subjects\\2025 - sem 2\\sgd240 - game coding\\sgd240_emergentbehaviour\\emergentsystem\\source\\emergentsystem\\emergentsystem.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

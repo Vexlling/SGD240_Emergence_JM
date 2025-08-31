@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "EmergentSystem",
+			"Path": "..\\Source\\EmergentSystem.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "EmergentSystemEditor",
+			"Path": "..\\Source\\EmergentSystemEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

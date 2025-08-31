@@ -1,0 +1,13 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = EmergentSystemModuleRules
+build_property.ProjectDir = C:\Uni Subjects\2025 - Sem 2\SGD240 - Game Coding\SGD240_EmergentBehaviour\EmergentSystem\Intermediate\Build\BuildRulesProjects\EmergentSystemModuleRules\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

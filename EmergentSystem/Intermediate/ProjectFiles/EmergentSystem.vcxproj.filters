@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\EmergentSystem.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\EmergentSystem.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\EmergentSystemEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\EmergentSystem">
+      <UniqueIdentifier>{60581446-9474-3C0F-9B78-9D05717CF573}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\EmergentSystem\EmergentSystem.Build.cs">
+      <Filter>Source\EmergentSystem</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\EmergentSystem\EmergentSystem.cpp">
+      <Filter>Source\EmergentSystem</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\EmergentSystem\EmergentSystem.h">
+      <Filter>Source\EmergentSystem</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
