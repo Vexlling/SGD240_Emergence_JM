@@ -5,6 +5,22 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/ObjectSpriteSheet_TileSet.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/LevelTest.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Main.umap",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/2x2ObjectSpriteSheet_TileSet.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/Sprite2x2CreatureB.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/Sprite_2x2_Creature_B.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/Sprite_2x2_Creature_A.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/Sprite_2x2_Spore.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Sprite_2x2_Creature_A.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Sprite_2x2_Creature_B.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Sprite_2x2_Spore.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/LevelTest.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Levels/LevelTest.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/2x2ObjectSpriteSheet.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/2x2ObjectSpriteSheetPadded.uasset",
+				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Advanced Games Programming/SGD240_EmergentBehaviour/EmergentSystem/Content/Sprites/Texture/ObjectSpriteSheet.uasset",
 				"C:/Uni Subjects/2025 - Sem 2/SGD240 - Game Coding/SGD240_EmergentBehaviour/EmergentSystem/Content/Main.umap"
 			]
 		}
