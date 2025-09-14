@@ -5,18 +5,23 @@ using UnityEngine;
 public class UnitController : MonoBehaviour
 {
     // Following StringCode's Unity Grid Based Movement System: Part 1 Setup 
+    // Following StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
 
     [SerializeField] float movementSpeed = 1.0f;
     
     Transform selectedUnit;
     bool unitSelected = false;
 
+    List<GridNode> path = new List<GridNode>();
+
     GridManager gridManager;
+    GridPathfinding pathFinder;
 
     
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
+        pathFinder = FindObjectOfType<GridPathfinding>();
     }
 
     // Update is called once per frame
@@ -35,12 +40,12 @@ public class UnitController : MonoBehaviour
                 {
                     if(unitSelected)
                     {
-                        Vector2Int targetCords = hit.transform.GetComponent<Labeller>().cords;
-                        Vector2Int startCords = new Vector2Int((int) selectedUnit.position.x, (int) selectedUnit.position.y) / gridManager.UnityGridSize;
+                        Vector2Int targetCords = hit.transform.GetComponent<Tile>().cords; // Labeller previous
+                        Vector2Int startCords = new Vector2Int((int)selectedUnit.transform.position.x, (int) selectedUnit.transform.position.y) / gridManager.UnityGridSize;
+                        // Changed from selectedUnit.transform.position.z
 
-                        selectedUnit.transform.position = new Vector2(targetCords.x/*, selectedUnit.position.y*/, targetCords.y);
-                        // Changed Vector3 to Vector2 because I don't need the 3rd dimension
-                        // Also it caused the unit to move along the z-axis instead of the y
+                        pathFinder.SetNewDestination(startCords, targetCords);
+                        RecalculatePath(true);
                     }
                 }
 
@@ -49,6 +54,44 @@ public class UnitController : MonoBehaviour
                     selectedUnit = hit.transform;
                     unitSelected = true;
                 }
+            }
+        }
+    }
+
+    void RecalculatePath(bool resetPath)
+    {
+        Vector2Int coordinates = new Vector2Int();
+        if (resetPath)
+        {
+            coordinates = pathFinder.StartCords;
+        }
+        else
+        {
+            coordinates = gridManager.GetCoordinatesFromPosition(transform.position); 
+        }
+
+        StopAllCoroutines();
+        path.Clear();
+        path = pathFinder.GetNewPath(coordinates);
+        StartCoroutine(FollowPath());
+    }
+
+    IEnumerator FollowPath()
+    {
+        for(int i = 1; i < path.Count; i++)
+        {
+            Vector2 startPosition = selectedUnit.position;  // Changed from Vetcor 3
+            Vector2 endPosition = gridManager.GetPositionFromCoordinates(path[i].cords); // Changed from Vetcor 3
+            float travelPercent = 0f;
+
+            //selectedUnit.LookAt(endPosition); 
+            // not necessary for top down 2d
+
+            while (travelPercent < 1f)
+            {
+                travelPercent += Time.deltaTime * movementSpeed;
+                selectedUnit.position = Vector2.Lerp(startPosition, endPosition, travelPercent); // Changed from Vetcor 3
+                yield return new WaitForEndOfFrame();
             }
         }
     }

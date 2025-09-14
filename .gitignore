@@ -70,3 +70,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /Emergence/Assets/[Ss]treamingAssets/aa.meta
 /Emergence/Assets/[Ss]treamingAssets/aa/*
+
+# Files that keeps showing up in commits despite being stated as ignored
+Emergence/Logs/shadercompiler-UnityShaderCompiler
+Emergence/UserSettings/Layouts/
