@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    // Following StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
+    // StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
 
     [SerializeField] bool blocked;
 
-    // [SerializeField] floor sprite 
-    // [SerializeField] wall/blocked sprite
+    [SerializeField] SpriteRenderer tileSprite;
+    [SerializeField] Sprite walkableTile;
+    [SerializeField] Sprite blockedTile;
 
     public Vector2Int cords;
 
@@ -19,6 +20,7 @@ public class Tile : MonoBehaviour
     void Start()
     {
         SetCords();
+        SetTileSprite();
 
         if (blocked)
         {
@@ -35,6 +37,16 @@ public class Tile : MonoBehaviour
         cords = new Vector2Int(x / gridManager.UnityGridSize, y / gridManager.UnityGridSize); // orignally int z
     }
     
-    // set tile sprite or colour to chosen one based on bool
-
+    private void SetTileSprite()
+    {
+        // doesn't show in editor
+        if (blocked)
+        {
+            tileSprite.sprite = blockedTile;
+        }
+        else
+        {
+            tileSprite.sprite = walkableTile;
+        }
+    }
 }

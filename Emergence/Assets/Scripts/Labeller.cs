@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 [ExecuteAlways]
 public class Labeller : MonoBehaviour
@@ -12,6 +13,7 @@ public class Labeller : MonoBehaviour
     TextMeshPro label;
     public Vector2Int cords = new Vector2Int(); // Specified as public because it was throwing a CS0122 Error in the UnitController Script
     GridManager gridManager;
+
 
     [SerializeField] Color defaultColour = Color.white;
     [SerializeField] Color blockedColour = Color.red;
@@ -83,6 +85,7 @@ public class Labeller : MonoBehaviour
             label.enabled = !label.IsActive();
         }
     }
+
 }
        
 
