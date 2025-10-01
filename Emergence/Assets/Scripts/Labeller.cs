@@ -40,6 +40,10 @@ public class Labeller : MonoBehaviour
 
         ToggleLabels();
         SetLabelColour();
+
+        // Updates editor tile sprite in real time
+        Tile tile = gameObject.GetComponent<Tile>();
+        tile.SetTileSprite();
     }
 
     void SetLabelColour()
@@ -66,7 +70,6 @@ public class Labeller : MonoBehaviour
         {
             label.color = defaultColour;
         }
-
     }
 
     private void DisplayCords()

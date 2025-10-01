@@ -108,8 +108,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283650903
+  m_fontColor: {r: 0.33962262, g: 0.32573867, b: 0.32573867, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cords: {x: 0, y: 0}
-  defaultColour: {r: 1, g: 1, b: 1, a: 1}
+  defaultColour: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
   blockedColour: {r: 0.28930807, g: 0.026383411, b: 0.026383411, a: 1}
   exploredColour: {r: 0.34786984, g: 0.899371, b: 0.17817716, a: 1}
   pathColour: {r: 0.81761, g: 0.26482323, b: 0.7171034, a: 1}
@@ -303,7 +303,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1010453196, guid: 6fbce835dc9dbda429732b2cc65091ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -311,7 +311,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8390734388872492281

@@ -20,7 +20,6 @@ public class Tile : MonoBehaviour
     void Start()
     {
         SetCords();
-        SetTileSprite();
 
         if (blocked)
         {
