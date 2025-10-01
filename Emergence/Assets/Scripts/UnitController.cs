@@ -7,6 +7,9 @@ public class UnitController : MonoBehaviour
     // Following StringCode's Unity Grid Based Movement System: Part 1 Setup 
     // Following StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
 
+    // change unit controller for indavidual use
+    // will become action exacutor as dictated by the utility script
+
     [SerializeField] float movementSpeed = 1.0f;
     
     Transform selectedUnit;
@@ -40,9 +43,11 @@ public class UnitController : MonoBehaviour
                 {
                     if(unitSelected)
                     {
-                        Vector2Int targetCords = hit.transform.GetComponent<Tile>().cords; // Labeller previous
+                        Vector2Int targetCords = hit.transform.GetComponent<Tile>().cords; // by clicking get coordinates of the tile and set as the target
                         Vector2Int startCords = new Vector2Int((int)selectedUnit.transform.position.x, (int) selectedUnit.transform.position.y) / gridManager.UnityGridSize;
-                        // Changed from selectedUnit.transform.position.z
+                        // by clicking a unit, select it and set tile as start 
+                        // change target cords to closest prefab of type
+                        // change start cords to cords to attached prefab
 
                         pathFinder.SetNewDestination(startCords, targetCords);
                         RecalculatePath(true);

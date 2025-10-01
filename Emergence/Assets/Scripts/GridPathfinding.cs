@@ -18,14 +18,21 @@ public class GridPathfinding : MonoBehaviour
     GridNode targetNode;
     GridNode currentNode;
 
-    Queue<GridNode> frontier = new Queue<GridNode>();
-    Dictionary<Vector2Int, GridNode> reached = new Dictionary<Vector2Int, GridNode>(); 
+    Queue<GridNode> frontier = new Queue<GridNode>(); // change frontier to openSet for calrity?
+    Dictionary<Vector2Int, GridNode> reached = new Dictionary<Vector2Int, GridNode>(); // same but closedSet
 
     GridManager gridManager;
     Dictionary<Vector2Int, GridNode> grid = new Dictionary<Vector2Int, GridNode>();
 
-    Vector2Int[] searchOrder = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down }; // search order for breadth first search
-
+    // search order for breadth first search
+    Vector2Int[] searchOrder = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down, new Vector2Int(1, 1), new Vector2Int(-1, 1), new Vector2Int(1, -1), new Vector2Int(-1, -1) }; 
+    /*
+    Diagonal search:  
+        Vector2Int(1, 1) = TopRight
+        Vector2Int(-1, 1) = TopLeft
+        Vector2Int(1, -1) = BottomRight
+        Vector2Int(-1, -1) = BottomLeft
+    */
 
     private void Awake()
     {

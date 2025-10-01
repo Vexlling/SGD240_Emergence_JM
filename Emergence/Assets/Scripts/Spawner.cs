@@ -10,7 +10,9 @@ public class Spawner : MonoBehaviour
     Then spawn the attached prefabs either overtime or once in the beginning and depending on the amount */
 
 
-    public Tilemap tilemap;
+
+
+    //public Tilemap tilemap;
     //public Tile floor;
     //public Tile obstacle;
 
@@ -22,11 +24,11 @@ public class Spawner : MonoBehaviour
     //
     //public Grid[,] grid;
     
-    public Node nodePrefab;
-    public List<Node> nodeList;
+    //public Node nodePrefab;
+    //public List<Node> nodeList;
 
-    public Pathfinder npc;
-    private bool canDrawGizmos;
+    //public Pathfinder npc;
+    //private bool canDrawGizmos;
     //
 
     /*void CreateNodes()
@@ -40,6 +42,7 @@ public class Spawner : MonoBehaviour
         }
     }*/
 
+    /*
     void CreateConnections()
     {
         for(int i = 0; i < nodeList.Count; i++)
@@ -127,5 +130,5 @@ public class Spawner : MonoBehaviour
             }
         }
         CreateConnections();
-    }
+    }*/
 }

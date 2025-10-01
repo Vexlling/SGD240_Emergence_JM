@@ -19,6 +19,10 @@ public class GridManager : MonoBehaviour
         CreateGrid();
     }
 
+    // update void to check tile availability
+    // if tile suddenly becomes available set explored to false and add to blocked node list is suddenly blocked
+    // might need to defrentiate between perm block and temp block nodes
+
     public GridNode GetNode(Vector2Int coordinates)
     {
         if (grid.ContainsKey(coordinates))

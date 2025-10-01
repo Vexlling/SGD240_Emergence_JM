@@ -60,7 +60,7 @@ public class Labeller : MonoBehaviour
         }
         else if (node.explored)
         {
-            label .color = exploredColour;
+            label.color = exploredColour;
         }
         else
         {
