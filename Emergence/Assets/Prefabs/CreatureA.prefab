@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPopulation: 0
+  initialSpawnSize: 0
+  spawnInterval: 1
 --- !u!114 &8399370034923687230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70ffcc8cddb0d47b5749afad1bf730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomiseTraits: 0
 --- !u!114 &-3903025151541257744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b75b088050764419e35e38253cdf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHunger: 1
 --- !u!114 &3780029565995639046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab73d36ca6660d4993bbb079e07ba45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 1
 --- !u!212 &1460420972206005680
 SpriteRenderer:
   m_ObjectHideFlags: 0
