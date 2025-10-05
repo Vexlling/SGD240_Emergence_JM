@@ -18,13 +18,13 @@ public class UnitController : MonoBehaviour
     List<GridNode> path = new List<GridNode>();
 
     GridManager gridManager;
-    GridPathfinding pathFinder;
+    GridPathfinding pathFinder; //GridPathFinding
 
     
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
-        pathFinder = FindObjectOfType<GridPathfinding>();
+        pathFinder = FindObjectOfType<GridPathfinding>(); //gridpathfinding
     }
 
     // Update is called once per frame
@@ -51,6 +51,8 @@ public class UnitController : MonoBehaviour
 
                         pathFinder.SetNewDestination(startCords, targetCords);
                         RecalculatePath(true);
+
+                        Debug.Log("Tring to Set new destination");
                     }
                 }
 
@@ -58,6 +60,7 @@ public class UnitController : MonoBehaviour
                 {
                     selectedUnit = hit.transform;
                     unitSelected = true;
+                    Debug.Log("unit selected");
                 }
             }
         }
@@ -65,6 +68,7 @@ public class UnitController : MonoBehaviour
 
     void RecalculatePath(bool resetPath)
     {
+        Debug.Log("Recalculate path called");
         Vector2Int coordinates = new Vector2Int();
         if (resetPath)
         {
@@ -83,8 +87,11 @@ public class UnitController : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        for(int i = 1; i < path.Count; i++)
+        Debug.Log("follow path called");
+        for (int i = 1; i < path.Count; i++)
         {
+            Debug.Log("trying to move unit");
+
             Vector2 startPosition = selectedUnit.position;  // Changed from Vetcor 3
             Vector2 endPosition = gridManager.GetPositionFromCoordinates(path[i].cords); // Changed from Vetcor 3
             float travelPercent = 0f;

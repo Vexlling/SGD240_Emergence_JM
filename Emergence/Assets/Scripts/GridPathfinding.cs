@@ -24,14 +24,14 @@ public class GridPathfinding : MonoBehaviour
     GridManager gridManager;
     Dictionary<Vector2Int, GridNode> grid = new Dictionary<Vector2Int, GridNode>();
 
-    // search order for breadth first search
-    Vector2Int[] searchOrder = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down, new Vector2Int(1, 1), new Vector2Int(-1, 1), new Vector2Int(1, -1), new Vector2Int(-1, -1) }; 
+    // clockwise search order for pathfinder algarithim 
+    Vector2Int[] searchOrder = { Vector2Int.up, new Vector2Int(1, 1), Vector2Int.right, new Vector2Int(1, -1), Vector2Int.down, new Vector2Int(-1, -1), Vector2Int.left, new Vector2Int(-1, 1) }; 
     /*
     Diagonal search:  
         Vector2Int(1, 1) = TopRight
         Vector2Int(-1, 1) = TopLeft
         Vector2Int(1, -1) = BottomRight
-        Vector2Int(-1, -1) = BottomLeft
+        Vector2Int(-1, -1) = BottomLeft            
     */
 
     private void Awake()
@@ -90,7 +90,7 @@ public class GridPathfinding : MonoBehaviour
         {
             Vector2Int neighbourCords = currentNode.cords + direction;
 
-            if (grid.ContainsKey(neighbourCords))
+            if (grid.ContainsKey(neighbourCords)) 
             {
                 neighbours.Add(grid[neighbourCords]);
             }

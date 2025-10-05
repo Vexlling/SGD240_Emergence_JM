@@ -36,9 +36,10 @@ public class Tile : MonoBehaviour
         cords = new Vector2Int(x / gridManager.UnityGridSize, y / gridManager.UnityGridSize); // orignally int z
     }
     
-    private void SetTileSprite()
+    
+    public void SetTileSprite()
     {
-        // doesn't show in editor
+        // called from Labeller script
         if (blocked)
         {
             tileSprite.sprite = blockedTile;

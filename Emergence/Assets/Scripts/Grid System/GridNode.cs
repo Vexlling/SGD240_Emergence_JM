@@ -11,11 +11,17 @@ public class GridNode
     public bool walkable;
     public bool explored;
     public bool path;
-    public GridNode connectTo; // change to parent for clarity?
+    public GridNode connectTo;
 
-    // public int/float gCost                       distance from start node to current node
-    // public int/float hCost                       estimated distance from current node to target node
-    // public int/float fCost = gCost + hCost       sum of g and h
+    public float gCost = float.MaxValue;           // distance from start node to current node
+    public float hCost;                           // estimated distance from current node to target node
+    public float fCost;                          // sum of g & h 
+    public float FCost()
+    {
+        return gCost + hCost;
+    }
+
+     
 
     public GridNode(Vector2Int cords, bool walkable)
     {
