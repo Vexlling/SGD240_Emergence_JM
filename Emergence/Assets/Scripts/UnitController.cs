@@ -10,6 +10,8 @@ public class UnitController : MonoBehaviour
     // change unit controller for indavidual use
     // will become action exacutor as dictated by the utility script
 
+    // will dictate what happens when a prefab is distroyed and when it is spawned(i.e node.walkable = false)
+
     [SerializeField] float movementSpeed = 1.0f;
     
     Transform selectedUnit;
@@ -46,8 +48,8 @@ public class UnitController : MonoBehaviour
                         Vector2Int targetCords = hit.transform.GetComponent<Tile>().cords; // by clicking get coordinates of the tile and set as the target
                         Vector2Int startCords = new Vector2Int((int)selectedUnit.transform.position.x, (int) selectedUnit.transform.position.y) / gridManager.UnityGridSize;
                         // by clicking a unit, select it and set tile as start 
-                        // change target cords to closest prefab of type
-                        // change start cords to cords to attached prefab
+                        // change target cords to closest prefabTotal of type
+                        // change start cords to cords to attached prefabTotal
 
                         pathFinder.SetNewDestination(startCords, targetCords);
                         RecalculatePath(true);

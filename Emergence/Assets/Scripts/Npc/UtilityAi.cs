@@ -6,7 +6,7 @@ public class UtilityAi : MonoBehaviour
 {
 
     // [SerializeField] will eat element index list
-    // [SerializeField] wants to eat /desires prefab
+    // [SerializeField] wants to eat /desires prefabTotal
 
     // personality slider options (none, random, specific)
     [SerializeField] private bool randomiseTraits;

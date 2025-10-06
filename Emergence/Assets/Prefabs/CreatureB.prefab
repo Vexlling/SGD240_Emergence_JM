@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6368954012783090905}
   - component: {fileID: 924838975449420738}
   - component: {fileID: -5515706601468304988}
-  - component: {fileID: -5184890160485813661}
   - component: {fileID: 7212968533759731004}
   - component: {fileID: 9178406770582495477}
   m_Layer: 0
@@ -48,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70ffcc8cddb0d47b5749afad1bf730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomiseTraits: 0
 --- !u!114 &-5515706601468304988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,19 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b75b088050764419e35e38253cdf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5184890160485813661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2525889993887320109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728ee78707bc1db4cb4aca64c9e01b83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPopulation: 0
+  maxHunger: 1
 --- !u!114 &7212968533759731004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab73d36ca6660d4993bbb079e07ba45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 1
 --- !u!212 &9178406770582495477
 SpriteRenderer:
   m_ObjectHideFlags: 0
