@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70ffcc8cddb0d47b5749afad1bf730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  willEat:
+  - {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
+  - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
+  desired: {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
   randomiseTraits: 0
 --- !u!114 &-5515706601468304988
 MonoBehaviour:

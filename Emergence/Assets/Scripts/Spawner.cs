@@ -20,13 +20,14 @@ public class Spawner : MonoBehaviour
     GridManager gridManager;
     private Dictionary<Vector2Int, GridNode> grid;
 
-
     private List<GridNode> available = new List<GridNode>();
-    List<GridNode> positions = new List<GridNode>();
     private List<GameObject> prefabTotal = new List<GameObject>();
-
     private bool isSpawning = false;
     private bool groupSpawned = false;
+
+
+    private List<GridNode> positions = new List<GridNode>();
+    public List<GridNode> Positions { get { return positions; } }
 
 
     private void Awake()
