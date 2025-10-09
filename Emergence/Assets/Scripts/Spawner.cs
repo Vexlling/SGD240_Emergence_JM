@@ -4,30 +4,30 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using System.Linq;
+using UnityEditor;
 
 public class Spawner : MonoBehaviour
 {
-
-    //Spawner Script will call gridmanager script for walkable nodes and randomly spawn prefabs
 
     [SerializeField] private GameObject[] prefab;
     [SerializeField] private int maxPopulation;
     [SerializeField] private int initialSpawnSize;
     [SerializeField] private float spawnInterval = 1.0f;
 
-    // track available grid tiles
-    // update per spawnrate tick
-
 
     GridNode node;
 
     GridManager gridManager;
-    private Dictionary<Vector2Int, GridNode> grid = new Dictionary<Vector2Int, GridNode>();
-    
-    //List<Vector2Int> tempBlocked = new List<Vector2Int>();
-    List<GridNode> available = new List<GridNode>();
+    private Dictionary<Vector2Int, GridNode> grid;
+
+
+    private List<GridNode> available = new List<GridNode>();
+    List<GridNode> positions = new List<GridNode>();
     private List<GameObject> prefabTotal = new List<GameObject>();
-    private bool isSpawining = false;
+
+    private bool isSpawning = false;
+    private bool groupSpawned = false;
+
 
     private void Awake()
     {
@@ -40,19 +40,14 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        CheckAvailability();
-        StartCoroutine(ContinueSpawning());
+        InitialSpawn();
     }
 
-    // on spawn intervals
-    // add all nodes from tempariiy blocked list to potential list
-    // check the dictionary for any nodes not walkable anymore
-    // add not walkable nodes to tempuariliy blocked list
-    // spawn on random available tiles
+   
 
     void Update()
     {
-        if (!isSpawining && prefabTotal.Count < maxPopulation)
+        if (!isSpawning && prefabTotal.Count < maxPopulation && groupSpawned)
         {
             StartCoroutine(ContinueSpawning());
         }
@@ -66,21 +61,26 @@ public class Spawner : MonoBehaviour
             return;
         }
 
+        //available.RemoveAll(node => positions.Contains(node)); 
+
 
         int randomIndex = Random.Range(0, available.Count);
         GridNode spawnPosition = available[randomIndex];
 
-        if (spawnPosition.walkable == true)
+        if (!positions.Contains(spawnPosition) && spawnPosition.walkable == true)
         {
             GameObject gameObject = Instantiate(prefab[0], new Vector3Int(spawnPosition.cords.x, spawnPosition.cords.y), Quaternion.identity);
+
             prefabTotal.Add(gameObject);
+            positions.Add(spawnPosition);
         }
-        
+        else SpawnPrefab(); // seems like a bad thing to do, like it could endlessly loop   
     }
 
     private IEnumerator ContinueSpawning()
     {
-        isSpawining = true;
+
+        isSpawning = true;
 
         while (prefabTotal.Count < maxPopulation)
         {
@@ -89,42 +89,37 @@ public class Spawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
 
-        isSpawining = false;
+        isSpawning = false;
     }
 
-    private void CheckAvailability()
+    private void CheckAvailability() // refreshes everytime to account for moving units
     {
-        //tempBlocked.Clear();
-        available.Clear();
 
-        // available = grid;
-
-        /*foreach (KeyValuePair<Vector2Int, GridNode> entry in grid)
-        {
-            print("You have " + entry.Value + " " + entry.Key);
-
-        }*/
         available = grid.Values.ToList();
-        /*foreach (KeyValuePair<Vector2Int, GridNode> entry in grid)
-        {
-            //if (node.walkable == true)
-            //{
-                available.Add(node);
-                Debug.Log("node added to available");
-            //}
 
-            //continue;
-        }*/
-        /*foreach (var node in available)
+        foreach (GridNode entry in available)
         {
-            Debug.Log(node.ToString());
-        }*/
+            if (entry.walkable == false)
+            {
+                available.Remove(node);
+               // Debug.Log("node removed from available");
+            }
+
+            continue;
+        }
     }
 
-    // tile availability
-    // get tile blocked bool
-    // get tile cords
-    // if tile is not blocked
-    // add tile cords to dictionary
+    private void InitialSpawn()
+    {
 
+        CheckAvailability();
+        
+        for (int count = 0; prefabTotal.Count < initialSpawnSize - 1; count++) // - 1 because it kept spawning intitalSpawnSize + 1?
+        {
+            SpawnPrefab();
+        }
+
+        groupSpawned = true;
+        return;
+    }
 }
