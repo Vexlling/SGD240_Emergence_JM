@@ -9,13 +9,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6368954012783090905}
+  - component: {fileID: 1808560194086691738}
   - component: {fileID: 924838975449420738}
   - component: {fileID: -5515706601468304988}
   - component: {fileID: 7212968533759731004}
   - component: {fileID: 9178406770582495477}
+  - component: {fileID: -2522986181498046751}
   m_Layer: 0
   m_Name: CreatureB
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,6 +37,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1808560194086691738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525889993887320109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f0c10e34c74a1499eb054b059cc135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 1
+  maxHunger: 1
+  willEat:
+  - {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
+  - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
+  desired: {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
 --- !u!114 &924838975449420738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,11 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70ffcc8cddb0d47b5749afad1bf730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  willEat:
-  - {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
-  - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
-  desired: {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
   randomiseTraits: 0
+  intimidationScale: 0
+  braveryScale: 0
 --- !u!114 &-5515706601468304988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +82,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b75b088050764419e35e38253cdf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHunger: 1
 --- !u!114 &7212968533759731004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab73d36ca6660d4993bbb079e07ba45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
 --- !u!212 &9178406770582495477
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -130,3 +146,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &-2522986181498046751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525889993887320109}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}

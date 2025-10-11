@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Trackers : MonoBehaviour
 {
-
-    [SerializeField] private int maxHunger = 1; 
     // track state scores
     // track consideration scores
 
+    // track proximity to closest A
+    // track proximity to closest B
+    // track proximity to closest Spore
+
+    // track hunger level
+
+    // will need ref to gridManager
 
     void Start()
     {

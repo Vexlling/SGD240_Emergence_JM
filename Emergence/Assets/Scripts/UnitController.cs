@@ -20,13 +20,13 @@ public class UnitController : MonoBehaviour
     List<GridNode> path = new List<GridNode>();
 
     GridManager gridManager;
-    GridPathfinding pathFinder; //GridPathFinding
+    GridPathfinding pathFinder;
 
     
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
-        pathFinder = FindObjectOfType<GridPathfinding>(); //gridpathfinding
+        pathFinder = FindObjectOfType<GridPathfinding>(); //change to GetComponent of Type for Individual use
     }
 
     // Update is called once per frame

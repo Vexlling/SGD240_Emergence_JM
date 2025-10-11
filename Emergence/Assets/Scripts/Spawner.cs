@@ -44,8 +44,6 @@ public class Spawner : MonoBehaviour
         InitialSpawn();
     }
 
-   
-
     void Update()
     {
         if (!isSpawning && prefabTotal.Count < maxPopulation && groupSpawned)
@@ -71,6 +69,8 @@ public class Spawner : MonoBehaviour
         if (!positions.Contains(spawnPosition) && spawnPosition.walkable == true)
         {
             GameObject gameObject = Instantiate(prefab[0], new Vector3Int(spawnPosition.cords.x, spawnPosition.cords.y), Quaternion.identity);
+
+            // spawn under UnitManager in Scene
 
             prefabTotal.Add(gameObject);
             positions.Add(spawnPosition);
@@ -122,5 +122,10 @@ public class Spawner : MonoBehaviour
 
         groupSpawned = true;
         return;
+    }
+
+    public void RemoveEaten(GridNode node)
+    {
+        positions.Remove(node);
     }
 }

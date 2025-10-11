@@ -9,11 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3985384527035632909}
+  - component: {fileID: -6338913689427993542}
   - component: {fileID: 8399370034923687230}
   - component: {fileID: -3903025151541257744}
   - component: {fileID: 3780029565995639046}
   - component: {fileID: 1460420972206005680}
   - component: {fileID: -5968980317336315053}
+  - component: {fileID: -2299913371975017675}
   m_Layer: 0
   m_Name: CreatureA
   m_TagString: Unit
@@ -36,6 +38,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6338913689427993542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641757540155703832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f0c10e34c74a1499eb054b059cc135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 1
+  maxHunger: 1
+  willEat:
+  - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
+  - {fileID: 641757540155703832}
+  desired: {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
 --- !u!114 &8399370034923687230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,13 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70ffcc8cddb0d47b5749afad1bf730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  willEat:
-  - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
-  - {fileID: 641757540155703832}
-  desired: {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
   randomiseTraits: 0
-  intimidation: 0
-  bravery: 10
+  intimidationScale: 0
+  braveryScale: 0
 --- !u!114 &-3903025151541257744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +83,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b75b088050764419e35e38253cdf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHunger: 1
 --- !u!114 &3780029565995639046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab73d36ca6660d4993bbb079e07ba45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
 --- !u!212 &1460420972206005680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -154,3 +168,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2299913371975017675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641757540155703832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de568f3a9f3d624f928c1157c3a480f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startCords: {x: 0, y: 0}
+  targetCords: {x: 0, y: 0}

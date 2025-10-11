@@ -21,8 +21,6 @@ public class GridNode
         return gCost + hCost;
     }
 
-     
-
     public GridNode(Vector2Int cords, bool walkable)
     {
         this.cords = cords;
