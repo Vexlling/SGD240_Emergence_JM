@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GridPathfinding : MonoBehaviour
 {
-    // Following StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
+    // Based on "Unity Grid Based Movement System: Part 2 Breadth First Search" by StringCode
+    // Some Code adapted from "6.10 Unity Tower defense tutorial - Corner cutting" by inScope Studios
 
     // Will need to made for individuality
 
@@ -92,7 +94,19 @@ public class GridPathfinding : MonoBehaviour
 
             if (grid.ContainsKey(neighbourCords)) 
             {
-                neighbours.Add(grid[neighbourCords]);
+                if (Math.Abs(neighbourCords.x - neighbourCords.y) == 1) // straight movement
+                {
+                    neighbours.Add(grid[neighbourCords]);
+                }
+                else // diagonal movement
+                {
+                    if (!ConnectedDiagonally(currentNode, grid[neighbourCords])) // don't go through diagonal gap in walls
+                    {
+                        continue;
+                    }
+
+                    neighbours.Add(grid[neighbourCords]);
+                }
             }
         }
 
@@ -139,4 +153,24 @@ public class GridPathfinding : MonoBehaviour
         targetNode = grid[this.targetCords];
         GetNewPath();
     }
+
+    private bool ConnectedDiagonally(GridNode currentNode, GridNode neighbour) // corner cutting
+    {
+        Vector2Int direction = neighbour.cords - currentNode.cords;
+
+        Vector2Int first = new Vector2Int(currentNode.cords.x + direction.x, currentNode.cords.y);
+        Vector2Int second = new Vector2Int(currentNode.cords.x, currentNode.cords.y + direction.y);
+
+        if (grid.ContainsKey(first) && !grid[first].walkable)
+        {
+            return false;
+        }
+
+        if (grid.ContainsKey(second) && !grid[second].walkable)
+        {
+            return false;
+        }
+
+        return true;
+    } // corner cutting
 }

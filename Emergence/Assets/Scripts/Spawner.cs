@@ -126,6 +126,13 @@ public class Spawner : MonoBehaviour
 
     public void RemoveEaten(GridNode node)
     {
-        positions.Remove(node);
+        if (positions.Contains(node))
+        {
+            positions.Remove(node);
+        } 
+        else
+        {
+            // Debug.Log("node not in Spawner positions list");
+        }
     }
 }

@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class Trackers : MonoBehaviour
 {
+
     // track state scores
     // track consideration scores
 
-    // track proximity to closest A
-    // track proximity to closest B
-    // track proximity to closest Spore
+    // CONSIDERATIONS
+    // Max hunger
+    // time
+    // hunger level
+    // proximity to closest
+    // proximity to desired
 
-    // track hunger level
+    // TRACK
+    // hunger level = Max hunger - time
+    // proximity to closest =
+    // proximity to desird =
 
     // will need ref to gridManager
 
+    // SCORING
+    // input: hunger Status
+    // response curve: increase, slow at first, fast later
+
+    UnitManager unitManager;
+    // to get 
+
     void Start()
     {
-        
+        //unitManager = GetComponentInParent<UnitManager>(); // not sure this works
     }
 
 

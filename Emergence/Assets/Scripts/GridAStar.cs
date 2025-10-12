@@ -125,7 +125,7 @@ public class GridAStar : MonoBehaviour
         {
             if (closedList.Contains(neighbourNode)/* || !neighbourNode.walkable*/) continue;
 
-            float tentativeGCost = currentNode.gCost + GetDistance(currentNode.cords, neighbourNode.cords);
+            int tentativeGCost = currentNode.gCost + GetDistance(currentNode.cords, neighbourNode.cords);
 
             if (tentativeGCost < neighbourNode.gCost)
             {

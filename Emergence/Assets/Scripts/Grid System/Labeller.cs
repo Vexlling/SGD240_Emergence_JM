@@ -7,8 +7,8 @@ using static Unity.Collections.AllocatorManager;
 [ExecuteAlways]
 public class Labeller : MonoBehaviour
 {
-    // Following StringCode's Unity Grid Based Movement System: Part 1 Setup 
-    // Following StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
+    // Following "Unity Grid Based Movement System: Part 1 Setup" by StringCode 
+    // Following "Unity Grid Based Movement System: Part 2 Breadth First Search" by StringCode
 
     TextMeshPro label;
     public Vector2Int cords = new Vector2Int(); // Specified as public because it was throwing a CS0122 Error in the UnitController Script

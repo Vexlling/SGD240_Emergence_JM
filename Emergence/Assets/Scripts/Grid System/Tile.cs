@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    // StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
+    // Following "Unity Grid Based Movement System: Part 2 Breadth First Search" by StringCode
 
     [SerializeField] bool blocked;
 

@@ -51,11 +51,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
-  maxHunger: 1
   willEat:
   - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
   - {fileID: 641757540155703832}
   desired: {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
+  maxHunger: 100
+  nutritionalValue: 100
 --- !u!114 &8399370034923687230
 MonoBehaviour:
   m_ObjectHideFlags: 0

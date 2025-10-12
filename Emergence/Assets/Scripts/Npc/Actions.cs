@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Action
+public enum ActionType
 {
-    Idle,
+    Wander,
     EatDesired,
-    EatClosest
+    EatClosest,
+    Idle
 }
 
 public class Actions : MonoBehaviour
@@ -16,40 +17,55 @@ public class Actions : MonoBehaviour
     // execute selected action
     // Basic action list: wander, eat closest, eat desired, runaway
 
-
-    private void ExecutableActions()
+    void Start()
     {
-        /*
+
+    }
+
+    void Update()
+    {
+
+    }
+
+    private void ExecutableActions(ActionType action)
+    {
+        
         switch (action)
         {
-            case Action.Idle:
+            case ActionType.Wander:
 
                 // execute instructions
                 // set random destination within close range
 
                 break;
-            case Action.EatDesired:
+            case ActionType.EatDesired:
 
                 // execute instructions
                 // set destination to closest desired gameObject
+                // Eat(desired);
 
                 break;
-            case Action.EatClosest:
+            case ActionType.EatClosest:
 
                 // execute instructions
                 // set destination to closest gameObject in WillEat list
+                // Eat(closest);
 
                 break;
-        }*/
+            default: // Idle
+
+                // execute instructions
+                // debug.log Idle
+
+                break;
+        }
     }
 
-    void Start()
+    void Eat(GameObject prefab)
     {
-        
-    }
-
-    void Update()
-    {
-        
+        // on collision
+            // add nutritional value to hunger status
+            // remove collided from map prefab list
+            // destroy collided
     }
 }

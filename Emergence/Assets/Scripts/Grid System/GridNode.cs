@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class GridNode
 {
-    // Following StringCode's Unity Grid Based Movement System: Part 1 Setup 
-    // Following StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
+    // Based on "Unity Grid Based Movement System: Part 1 Setup" by StringCode 
+    // Based on "Unity Grid Based Movement System: Part 2 Breadth First Search" by StringCode
 
     public Vector2Int cords;
     public bool walkable;
     public bool explored;
     public bool path;
+    public bool IsEmpty = true; // for moving targets
     public GridNode connectTo;
 
-    public float gCost = float.MaxValue;           // distance from start node to current node
-    public float hCost;                           // estimated distance from current node to target node
-    public float fCost;                          // sum of g & h 
+    public int gCost;           // distance from start node to current node
+    public int hCost;                           // estimated distance from current node to target node
+    public int fCost;                          // sum of g & h 
     public float FCost()
     {
         return gCost + hCost;

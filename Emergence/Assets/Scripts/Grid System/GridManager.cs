@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    // Following StringCode's Unity Grid Based Movement System: Part 1 Setup 
-    // Following StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
+    // Following "Unity Grid Based Movement System: Part 1 Setup" by StringCode 
+    // Following "Unity Grid Based Movement System: Part 2 Breadth First Search" by StringCode
 
     [SerializeField] Vector2Int gridSize; 
     [SerializeField] int unityGridSize;

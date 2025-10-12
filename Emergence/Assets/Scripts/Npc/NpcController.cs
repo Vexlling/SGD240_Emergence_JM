@@ -10,10 +10,15 @@ public class NpcController : MonoBehaviour
     // Hub for internal parts to communicate and interact with each other
 
     [SerializeField] private float movementSpeed = 1.0f;
-    [SerializeField] private int maxHunger = 1;
+
+    [SerializeField] private int maxHunger;
+    [SerializeField] private int nutritionalValue;
 
     [SerializeField] private GameObject[] willEat;
     [SerializeField] private GameObject desired;
+
+    private 
+
 
     /*
     private GameObject spore;
@@ -28,9 +33,9 @@ public class NpcController : MonoBehaviour
         spore = prefab.spore;
         creatureA = prefab.creatureA;
         creatureB = prefab.creatureB;
-    }
+    }*/
 
-    UnitManager unitManager;*/
+    UnitManager unitManager;
 
     GridManager gridManager;
     GridPathfinding pathFinder; 
@@ -45,12 +50,14 @@ public class NpcController : MonoBehaviour
         pathFinder = GetComponent<GridPathfinding>();
         //pathFinder = GetComponent<GridAStar>();
         utilityAi = GetComponent<UtilityAi>();
-        //unitManager = GetComponentInParent<UnitManager>(); // not sure this works
+        unitManager = GetComponentInParent<UnitManager>(); // not sure this works
+
+        unitManager.prefabsInScene.Add(GetComponent<GameObject>());
     }
 
     
     void Update()
     {
-        
+        // set current gridnode sat on isEmpty = false;
     }
 }

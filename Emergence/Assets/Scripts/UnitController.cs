@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
-    // Following StringCode's Unity Grid Based Movement System: Part 1 Setup 
-    // Following StringCode's Unity Grid Based Movement System: Part 2 Breadth First Search
+    // Following "Unity Grid Based Movement System: Part 1 Setup" by StringCode 
+    // Following "Unity Grid Based Movement System: Part 2 Breadth First Search" by StringCode
 
     // change unit controller for indavidual use
     // will become action exacutor as dictated by the utility script

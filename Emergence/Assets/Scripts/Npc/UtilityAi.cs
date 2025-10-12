@@ -18,12 +18,20 @@ public class UtilityAi : MonoBehaviour
     private float intimidation;
     private float bravery;
 
+
+
     NpcController npc;
 
+    /*
+    Wander,
+    EatDesired,
+    EatClosest,
+    Idle
+    */
 
-    //tut
-    public Action bestAction { get; set; }
-    Actions actions;
+     
+    //public Action bestAction { get; set; }
+    //ActionType actions;
 
     // Score Actions function
     // Choose best Action function
@@ -67,13 +75,25 @@ public class UtilityAi : MonoBehaviour
         return output;
     }
 
-    public void DecideBestAction(Actions[] actionsAvailable) // might change to private if possible // Actions [] = actions switch cases
+    public void DecideBestAction(ActionType[] actionsAvailable) // might change to private if possible // Actions [] = actions switch cases
     {
 
     }
 
-    public void ScoreAction(Actions action) // might change to private if possible
+    public void ScoreAction(ActionType action) // might change to private if possible
     {
+        // input, input normalisation, reponsecurve
 
+        // WANDER
+        // input: hunger level
+        // response curve: increase, slow at first, fast later
+
+        // EAT CLOSEST
+        // input: hunger level & proximity to closest
+        // response curve: increase, slow at first, fast later
+
+        // EAT DESIRED
+        // input: hunger level & proximity to desired
+        // response curve: increase, slow at either end, fast in the middle
     }
 }
