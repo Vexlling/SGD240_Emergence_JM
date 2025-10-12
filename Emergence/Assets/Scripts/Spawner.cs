@@ -23,7 +23,9 @@ public class Spawner : MonoBehaviour
     private List<GridNode> available = new List<GridNode>();
     private List<GameObject> prefabTotal = new List<GameObject>();
     private bool isSpawning = false;
-    private bool groupSpawned = false;
+    //private bool groupSpawned = false;
+
+    public bool groupSpawned { get; private set; }
 
 
     private List<GridNode> positions = new List<GridNode>();
@@ -41,6 +43,7 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
+        groupSpawned = false;
         InitialSpawn();
     }
 

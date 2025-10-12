@@ -17,7 +17,7 @@ public class NpcController : MonoBehaviour
     [SerializeField] private GameObject[] willEat;
     [SerializeField] private GameObject desired;
 
-    private 
+    //private 
 
 
     /*
@@ -47,8 +47,10 @@ public class NpcController : MonoBehaviour
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
+
         pathFinder = GetComponent<GridPathfinding>();
         //pathFinder = GetComponent<GridAStar>();
+
         utilityAi = GetComponent<UtilityAi>();
         unitManager = GetComponentInParent<UnitManager>(); // not sure this works
 
@@ -59,5 +61,7 @@ public class NpcController : MonoBehaviour
     void Update()
     {
         // set current gridnode sat on isEmpty = false;
+
+        
     }
 }
