@@ -46,7 +46,7 @@ public class Actions : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
         if (spawner.groupSpawned && !movedOnce)
         {
             Vector2Int targetCords = positions[0].cords; // first spawned spore in scene regardless of proximity
@@ -66,33 +66,40 @@ public class Actions : MonoBehaviour
 
     private void ExecutableActions(ActionType action)
     {
-        
+        //Vector2Int startCords = new Vector2Int((int)prefab.transform.position.x, (int)prefab.transform.position.y) / gridManager.UnityGridSize;
+        // current position
+
+        // Vector2Int targetCords Types
+        // A: random index destination within close range
+        // B: closest desired gameobject 
+        // C: closest gameobject on WillEat List
+
         switch (action)
         {
             case ActionType.Wander:
 
                 // execute instructions
-                // set random destination within close range
+                //pathFinder.SetNewDestination(startCords, A);
 
                 break;
             case ActionType.EatDesired:
 
                 // execute instructions
-                // set destination to closest desired gameObject
+                //pathFinder.SetNewDestination(startCords, B);
                 // Eat(desired);
 
                 break;
             case ActionType.EatClosest:
 
                 // execute instructions
-                // set destination to closest gameObject in WillEat list
+                //pathFinder.SetNewDestination(startCords, C);
                 // Eat(closest);
 
                 break;
             default: // Idle
 
                 // execute instructions
-                // debug.log Idle
+                Debug.Log("Idle");
 
                 break;
         }
@@ -139,7 +146,7 @@ public class Actions : MonoBehaviour
             while (travelPercent < 1f)
             {
                 travelPercent += Time.deltaTime * 2f;
-                prefab.position = Vector2.Lerp(startPosition, endPosition, travelPercent);
+                prefab.position = Vector2.Lerp(startPosition, endPosition, travelPercent); // shouldn't affect z-axis but it does
                 yield return new WaitForEndOfFrame();
             }
         }

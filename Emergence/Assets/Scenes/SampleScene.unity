@@ -2919,8 +2919,8 @@ MonoBehaviour:
   prefab:
   - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
   maxPopulation: 1
-  initialSpawnSize: 1
-  spawnInterval: 0
+  initialSpawnSize: 0
+  spawnInterval: 0.8
 --- !u!1001 &1298526582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4537,11 +4537,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3985384527035632909, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6351986
+      value: -0.6351986
       objectReference: {fileID: 0}
     - target: {fileID: 3985384527035632909, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9467132
+      value: 1.0532868
       objectReference: {fileID: 0}
     - target: {fileID: 3985384527035632909, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_LocalPosition.z
