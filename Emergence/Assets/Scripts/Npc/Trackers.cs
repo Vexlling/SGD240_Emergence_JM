@@ -1,5 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Collections.LowLevel.Unsafe;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Trackers : MonoBehaviour
@@ -26,17 +30,77 @@ public class Trackers : MonoBehaviour
     // input: hunger Status
     // response curve: increase, slow at first, fast later
 
+    
+    private NpcController npc;
+    private NpcController thisNpc;
+
+    NpcController closestProx;
+    NpcController desiredProx;
+
+    public List<NpcController> proximity = new List<NpcController>();
+
+
     UnitManager unitManager;
-    // to get 
 
     void Start()
     {
-        //unitManager = GetComponentInParent<UnitManager>(); // not sure this works
+        unitManager = GetComponentInParent<UnitManager>(); // not sure this works
+        thisNpc = GetComponent<NpcController>();
     }
 
 
     void Update()
     {
+        UpdateHunger();
+    }
+
+    private void UpdateHunger()
+    {
+
+    }
+
+    public void CalculatePrxoimity() // only needs to be called once per run or per decision
+    {
+        List<NpcController> proximity = unitManager.prefabsInScene;
+
+        if (proximity.Contains(thisNpc) )
+        {
+            proximity.Remove(thisNpc);
+        }
+
+        if (proximity.Count > 0)
+        {
+            UpdateProximity();
+        }
+
+        return;
+        // this method could run into the error of new prefabs being added to the orginal list
+        // which this personal list won't pick up on
+        // or even run into the issue of another prefab already being eaten
+    }
+
+    public void UpdateProximity() // can be called multiple times
+    {
+        foreach (NpcController entry in proximity)
+        {
+            entry.hierarchicalCost = (Math.Abs(thisNpc.location.x - npc.location.x) + Math.Abs(thisNpc.location.y - npc.location.y)) * 10;
+            continue;
+        }
         
+        proximity.OrderBy(n => n.hierarchicalCost).ToList(); // ascending?
+
+        closestProx = proximity.First();
+        /*
+        // closestProx = proximity.FindIndex.Any(thisNpc.willEat);
+        if (proximity.Contains(thisNpc.desired)
+        {
+            desiredProx = proximity.Where(npc => npc.body == thisNpc.desired).First();
+        }
+        else { desiredProx = null; }*/
+
+        //thisNpc.willEat
+        //thisNpc.desired
+
+        // variable = List[0]
     }
 }

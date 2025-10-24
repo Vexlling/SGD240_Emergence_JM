@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -2522986181498046751}
   m_Layer: 0
   m_Name: CreatureB
-  m_TagString: Unit
+  m_TagString: cB
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,10 +51,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1
   maxHunger: 1
+  nutritionalValue: 0
   willEat:
   - {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
   - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
   desired: {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
+  location: {x: 0, y: 0}
 --- !u!114 &924838975449420738
 MonoBehaviour:
   m_ObjectHideFlags: 0

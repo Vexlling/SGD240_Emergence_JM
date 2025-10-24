@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -2299913371975017675}
   m_Layer: 0
   m_Name: CreatureA
-  m_TagString: Unit
+  m_TagString: cA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,13 +50,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f0c10e34c74a1499eb054b059cc135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  movementSpeed: 1.5
+  maxHunger: 100
+  nutritionalValue: 100
   willEat:
   - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
   - {fileID: 641757540155703832}
   desired: {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
-  maxHunger: 100
-  nutritionalValue: 100
+  location: {x: 0, y: 0}
+  hierarchicalCost: 0
 --- !u!114 &8399370034923687230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b75b088050764419e35e38253cdf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  proximity: []
 --- !u!114 &3780029565995639046
 MonoBehaviour:
   m_ObjectHideFlags: 0

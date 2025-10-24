@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+//using static UnityEngine.RuleTile.TilingRuleOutput;
 using System.Linq;
 using UnityEditor;
+using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
@@ -32,6 +34,10 @@ public class Spawner : MonoBehaviour
     public List<GridNode> Positions { get { return positions; } }
 
 
+    [SerializeField] private GameObject mother;
+    //UnitManager unitManager;
+
+
     private void Awake()
     {
         gridManager = FindObjectOfType<GridManager>();
@@ -45,6 +51,8 @@ public class Spawner : MonoBehaviour
     {
         groupSpawned = false;
         InitialSpawn();
+
+        //unitManager = GetComponent<UnitManager>();
     }
 
     void Update()
@@ -71,11 +79,10 @@ public class Spawner : MonoBehaviour
 
         if (!positions.Contains(spawnPosition) && spawnPosition.walkable == true)
         {
-            GameObject gameObject = Instantiate(prefab[0], new Vector3Int(spawnPosition.cords.x, spawnPosition.cords.y), Quaternion.identity);
-
-            // spawn under UnitManager in Scene
+            GameObject gameObject = Instantiate(prefab[0], new Vector3Int(spawnPosition.cords.x, spawnPosition.cords.y), Quaternion.identity, mother.transform);
 
             prefabTotal.Add(gameObject);
+            //unitManager.prefabsInScene.Add(gameObject);
             positions.Add(spawnPosition);
         }
         else SpawnPrefab(); // seems like a bad thing to do, like it could endlessly loop   
@@ -92,6 +99,8 @@ public class Spawner : MonoBehaviour
             SpawnPrefab();
             yield return new WaitForSeconds(spawnInterval);
         }
+
+        //Debug.Log("prefabs in list = " + unitManager.prefabsInScene.Count);
 
         isSpawning = false;
     }

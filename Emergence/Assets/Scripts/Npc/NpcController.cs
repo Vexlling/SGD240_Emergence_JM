@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-    // Similar to UnitController except for individual use
-    // Will replace UnitController later down the line
     
     // Hub for internal parts to communicate and interact with each other
 
-    [SerializeField] private float movementSpeed = 1.0f;
+    [SerializeField] public float movementSpeed = 1.0f;
 
     [SerializeField] private int maxHunger;
     [SerializeField] private int nutritionalValue;
 
-    [SerializeField] private GameObject[] willEat;
-    [SerializeField] private GameObject desired;
+    [SerializeField] public GameObject[] willEat;
+    [SerializeField] public GameObject desired;
 
-    //private 
+    public Vector2Int location;
 
+    public int hierarchicalCost;
+    NpcController thisNpc;
+    GameObject body;
+
+    // should I make this it's own script?
+    public NpcController(Vector2Int location, int hCost, GameObject body)
+    {
+        this.location = location;
+        this.hierarchicalCost = hCost;
+        this.body = body;
+    }
 
     /*
     private GameObject spore;
@@ -42,7 +51,15 @@ public class NpcController : MonoBehaviour
     //GridAStar pathFinder; 
 
     // Actions actions
-    UtilityAi utilityAi; 
+    UtilityAi utilityAi;
+
+
+    /*public Unit(Vector2Int location, bool walkable)
+    {
+        //this.GameObject = cords;
+        this.location = location;
+        return;
+    */
 
     void Start()
     {
@@ -52,16 +69,25 @@ public class NpcController : MonoBehaviour
         //pathFinder = GetComponent<GridAStar>();
 
         utilityAi = GetComponent<UtilityAi>();
-        unitManager = GetComponentInParent<UnitManager>(); // not sure this works
+        unitManager = GetComponentInParent<UnitManager>();
 
-        unitManager.prefabsInScene.Add(GetComponent<GameObject>());
+        body = GetComponent<GameObject>();
+        
+        
+        unitManager.prefabsInScene.Add(thisNpc);
     }
 
     
     void Update()
     {
+        
         // set current gridnode sat on isEmpty = false;
 
-        
+        //CurrentLocation();
+    }
+
+    public void CurrentLocation()
+    {
+        location = gridManager.GetCoordinatesFromPosition(transform.position);
     }
 }

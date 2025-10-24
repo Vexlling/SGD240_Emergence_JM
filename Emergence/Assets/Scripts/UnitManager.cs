@@ -9,17 +9,18 @@ public class UnitManager : MonoBehaviour
     //[SerializeField] public GameObject creatureA;
     //[SerializeField] public GameObject creatureB;
 
-    public List<GameObject> prefabsInScene = new List<GameObject>();
+    public List<NpcController> prefabsInScene = new List<NpcController>();
     //public List<GameObject> PrefabsInScene { get { return prefabsInScene; } }
 
-    
+    NpcController npc;
     //private List<GameObject> aTotal = new List<GameObject>();
     //private List<GameObject> bTotal = new List<GameObject>();
 
     // GameObject list of Spores, A & B
 
     [SerializeField] private int sporeNutrition; // make random an option too?
-   
+
+
 
     Spawner spawner;
     //List<GridNode> positions = new List<GridNode>();
@@ -30,12 +31,13 @@ public class UnitManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("prefabs in list = " + prefabsInScene.Count);
+        npc = GetComponent<NpcController>();
+        //Debug.Log("prefabs in list = " + prefabsInScene.Count);
+        
     }
 
     void Update()
     {
-        
-        
+        //Debug.Log("prefabs in list = " + prefabsInScene.Count);
     }
 }

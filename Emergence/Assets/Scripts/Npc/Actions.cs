@@ -25,11 +25,16 @@ public class Actions : MonoBehaviour
     Spawner spawner;
     GridNode node;
 
+    NpcController npc;
+    Trackers trackers;
+
     //GameObject prefab;
     Transform prefab;
     private List<GridNode> positions = new List<GridNode>();
     List<GridNode> path = new List<GridNode>();
     bool movedOnce = false;
+
+    private List<NpcController> proximity = new List<NpcController>();
 
 
     void Start()
@@ -38,30 +43,43 @@ public class Actions : MonoBehaviour
         pathFinder = GetComponent<GridPathfinding>();
         prefab = GetComponent<Transform>();
 
+        npc = GetComponent<NpcController>();
+
+        trackers = GetComponent<Trackers>();
+
         spawner = GetComponentInParent<Spawner>();
         if (spawner != null)
         {
             positions = spawner.Positions;
         }
+
+        if (trackers != null)
+        {
+            proximity = trackers.proximity;
+        }
     }
 
     void Update()
-    { 
-        if (spawner.groupSpawned && !movedOnce)
-        {
-            Vector2Int targetCords = positions[0].cords; // first spawned spore in scene regardless of proximity
-            Vector2Int startCords = new Vector2Int((int)prefab.transform.position.x, (int)prefab.transform.position.y) / gridManager.UnityGridSize;
-            // current position
-            
-            pathFinder.SetNewDestination(startCords, targetCords);
-            RecalculatePath(true);
+    {
+        //trackers.CalculatePrxoimity();
+        //if (proximity.Count > 0)
+        //{
+            if (spawner.groupSpawned && !movedOnce)
+            {
 
-            movedOnce = true;
+                Vector2Int targetCords = /*trackers.closestProx.location*/ positions[0].cords; // first spawned spore in scene regardless of proximity
+                Vector2Int startCords = new Vector2Int((int)prefab.transform.position.x, (int)prefab.transform.position.y) / gridManager.UnityGridSize;
+                // current position
 
-            //Debug.LogWarning("StartCords = " + startCords);
-            //Debug.LogWarning("targetCords = " + targetCords);
-        }
-        
+                pathFinder.SetNewDestination(startCords, targetCords);
+                RecalculatePath(true);
+
+                movedOnce = true;
+
+                //Debug.LogWarning("StartCords = " + startCords);
+                //Debug.LogWarning("targetCords = " + targetCords);
+            }
+        //}
     }
 
     private void ExecutableActions(ActionType action)
@@ -115,7 +133,7 @@ public class Actions : MonoBehaviour
 
     void RecalculatePath(bool resetPath)
     {
-        Debug.Log("Recalculate path called");
+        //Debug.Log("Recalculate path called");
         Vector2Int coordinates = new Vector2Int();
         if (resetPath)
         {
@@ -137,7 +155,7 @@ public class Actions : MonoBehaviour
         //Debug.Log("follow path called");
         for (int i = 1; i < path.Count; i++)
         {
-            Debug.Log("trying to move unit");
+            //Debug.Log("trying to move unit");
 
             Vector2 startPosition = prefab.position; 
             Vector2 endPosition = gridManager.GetPositionFromCoordinates(path[i].cords); 
@@ -145,10 +163,13 @@ public class Actions : MonoBehaviour
 
             while (travelPercent < 1f)
             {
-                travelPercent += Time.deltaTime * 2f;
+                travelPercent += Time.deltaTime * npc.movementSpeed;
                 prefab.position = Vector2.Lerp(startPosition, endPosition, travelPercent); // shouldn't affect z-axis but it does
                 yield return new WaitForEndOfFrame();
+
+                npc.CurrentLocation();
             }
         }
+        
     }
 }
