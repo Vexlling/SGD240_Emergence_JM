@@ -2,22 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum PrefabType
+{
+    A,
+    B,
+    Spore
+}
+
 public class NpcController : MonoBehaviour
 {
-    
+
     // Hub for internal parts to communicate and interact with each other
+
+    // naming the PrefabType prefabType, feels like it could run into some issues, hence creatureType
+    [SerializeField] private PrefabType creatureType;
 
     [SerializeField] public float movementSpeed = 1.0f;
 
     [SerializeField] private int maxHunger;
     [SerializeField] private int nutritionalValue;
 
-    [SerializeField] public GameObject[] willEat;
-    [SerializeField] public GameObject desired;
+    [SerializeField] public PrefabType[] willEat;
+    [SerializeField] public PrefabType desired;
 
     public Vector2Int location;
 
-    public int hierarchicalCost;
+    [HideInInspector] public int hierarchicalCost;
     NpcController thisNpc;
     GameObject body;
 

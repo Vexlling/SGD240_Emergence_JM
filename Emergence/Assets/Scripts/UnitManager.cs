@@ -18,6 +18,10 @@ public class UnitManager : MonoBehaviour
 
     // GameObject list of Spores, A & B
 
+
+
+
+
     [SerializeField] private int sporeNutrition; // make random an option too?
 
 
