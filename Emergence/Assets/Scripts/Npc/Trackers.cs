@@ -30,14 +30,17 @@ public class Trackers : MonoBehaviour
     // input: hunger Status
     // response curve: increase, slow at first, fast later
 
-    
-    private NpcController npc;
-    private NpcController thisNpc;
 
-    NpcController closestProx;
-    NpcController desiredProx;
+    //private NpcController npc;
+    //private NpcController thisNpc;
 
-    public List<NpcController> proximity = new List<NpcController>();
+    private Unit unit;
+    private Unit thisUnit;
+
+    Unit closestProx;
+    Unit desiredProx;
+
+    public List<Unit> proximity = new List<Unit>();
 
 
     UnitManager unitManager;
@@ -45,7 +48,8 @@ public class Trackers : MonoBehaviour
     void Start()
     {
         unitManager = GetComponentInParent<UnitManager>(); // not sure this works
-        thisNpc = GetComponent<NpcController>();
+        //thisNpc = GetComponent<NpcController>();
+        thisUnit = GetComponent<Unit>();
     }
 
 
@@ -61,11 +65,11 @@ public class Trackers : MonoBehaviour
 
     public void CalculatePrxoimity() // only needs to be called once per run or per decision
     {
-        List<NpcController> proximity = unitManager.prefabsInScene;
+        List<Unit> proximity = unitManager.prefabsInScene;
 
-        if (proximity.Contains(thisNpc) )
+        if (proximity.Contains(thisUnit) )
         {
-            proximity.Remove(thisNpc);
+            proximity.Remove(thisUnit);
         }
 
         if (proximity.Count > 0)
@@ -81,9 +85,9 @@ public class Trackers : MonoBehaviour
 
     public void UpdateProximity() // can be called multiple times
     {
-        foreach (NpcController entry in proximity)
+        foreach (Unit entry in proximity)
         {
-            entry.hierarchicalCost = (Math.Abs(thisNpc.location.x - npc.location.x) + Math.Abs(thisNpc.location.y - npc.location.y)) * 10;
+            entry.hierarchicalCost = (Math.Abs(thisUnit.location.x - unit.location.x) + Math.Abs(thisUnit.location.y - unit.location.y)) * 10;
             continue;
         }
         

@@ -13,47 +13,23 @@ public enum PrefabType
 public class NpcController : MonoBehaviour
 {
 
+    // script for all creature prefabs only (Spore will not have a NPC Controller)
     // Hub for internal parts to communicate and interact with each other
 
-    // naming the PrefabType prefabType, feels like it could run into some issues, hence creatureType
-    [SerializeField] private PrefabType creatureType;
 
-    [SerializeField] public float movementSpeed = 1.0f;
 
     [SerializeField] private int maxHunger;
-    [SerializeField] private int nutritionalValue;
+    //[SerializeField] private int nutritionalValue;
 
     [SerializeField] public PrefabType[] willEat;
     [SerializeField] public PrefabType desired;
 
-    public Vector2Int location;
+    //public Vector2Int location;
 
-    [HideInInspector] public int hierarchicalCost;
+    //[HideInInspector] public int hierarchicalCost;
     NpcController thisNpc;
     GameObject body;
 
-    // should I make this it's own script?
-    public NpcController(Vector2Int location, int hCost, GameObject body)
-    {
-        this.location = location;
-        this.hierarchicalCost = hCost;
-        this.body = body;
-    }
-
-    /*
-    private GameObject spore;
-    private GameObject creatureA;
-    private GameObject creatureB;
-
-    //ref to:
-    UnitManager prefab;
-
-    private void SetPrefabCorrelation() // call on awake or start?
-    {
-        spore = prefab.spore;
-        creatureA = prefab.creatureA;
-        creatureB = prefab.creatureB;
-    }*/
 
     UnitManager unitManager;
 
@@ -85,7 +61,7 @@ public class NpcController : MonoBehaviour
         body = GetComponent<GameObject>();
         
         
-        unitManager.prefabsInScene.Add(thisNpc);
+        //unitManager.prefabsInScene.Add(thisNpc);
     }
 
     
@@ -97,8 +73,8 @@ public class NpcController : MonoBehaviour
         //CurrentLocation();
     }
 
-    public void CurrentLocation()
+    /*public void CurrentLocation()
     {
         location = gridManager.GetCoordinatesFromPosition(transform.position);
-    }
+    }*/
 }

@@ -22,12 +22,6 @@ public class UtilityAi : MonoBehaviour
 
     NpcController npc;
 
-    /*
-    Wander,
-    EatDesired,
-    EatClosest,
-    Idle
-    */
 
      
     //public Action bestAction { get; set; }

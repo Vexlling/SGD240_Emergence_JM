@@ -4,29 +4,17 @@ using UnityEngine;
 
 public class UnitManager : MonoBehaviour
 {
-    // 
-    //[SerializeField] public GameObject spore;
-    //[SerializeField] public GameObject creatureA;
-    //[SerializeField] public GameObject creatureB;
+    // should the PrefabType enum be here since there will only ever be one UnitManager?
 
-    public List<NpcController> prefabsInScene = new List<NpcController>();
+
+    // GameObject list of Spores, A & B
+    public List<Unit> prefabsInScene = new List<Unit>();
     //public List<GameObject> PrefabsInScene { get { return prefabsInScene; } }
 
     NpcController npc;
-    //private List<GameObject> aTotal = new List<GameObject>();
-    //private List<GameObject> bTotal = new List<GameObject>();
-
-    // GameObject list of Spores, A & B
-
-
-
-
-
-    [SerializeField] private int sporeNutrition; // make random an option too?
-
-
-
+    Unit unit;
     Spawner spawner;
+
     //List<GridNode> positions = new List<GridNode>();
 
     // if a spore is eaten remove from 
@@ -37,6 +25,7 @@ public class UnitManager : MonoBehaviour
     {
         npc = GetComponent<NpcController>();
         //Debug.Log("prefabs in list = " + prefabsInScene.Count);
+        unit = GetComponent<Unit>();
         
     }
 

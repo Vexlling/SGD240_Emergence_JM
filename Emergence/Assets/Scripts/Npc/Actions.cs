@@ -20,6 +20,8 @@ public class Actions : MonoBehaviour
     // execute selected action
     // Basic action list: wander, eat closest, eat desired, runaway
 
+    [SerializeField] private float movementSpeed = 1.0f;
+
     GridManager gridManager;
     GridPathfinding pathFinder;
     Spawner spawner;
@@ -27,6 +29,7 @@ public class Actions : MonoBehaviour
 
     NpcController npc;
     Trackers trackers;
+    Unit unit;
 
     //GameObject prefab;
     Transform prefab;
@@ -34,7 +37,7 @@ public class Actions : MonoBehaviour
     List<GridNode> path = new List<GridNode>();
     bool movedOnce = false;
 
-    private List<NpcController> proximity = new List<NpcController>();
+    private List<Unit> proximity = new List<Unit>();
 
 
     void Start()
@@ -44,6 +47,7 @@ public class Actions : MonoBehaviour
         prefab = GetComponent<Transform>();
 
         npc = GetComponent<NpcController>();
+        unit = GetComponent<Unit>();
 
         trackers = GetComponent<Trackers>();
 
@@ -163,11 +167,11 @@ public class Actions : MonoBehaviour
 
             while (travelPercent < 1f)
             {
-                travelPercent += Time.deltaTime * npc.movementSpeed;
+                travelPercent += Time.deltaTime * movementSpeed;
                 prefab.position = Vector2.Lerp(startPosition, endPosition, travelPercent); // shouldn't affect z-axis but it does
                 yield return new WaitForEndOfFrame();
 
-                npc.CurrentLocation();
+                unit.CurrentLocation();
             }
         }
         

@@ -2887,7 +2887,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabsInScene: []
-  sporeNutrition: 40
 --- !u!4 &1295512767
 Transform:
   m_ObjectHideFlags: 0
@@ -4527,6 +4526,10 @@ PrefabInstance:
     - target: {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_Name
       value: CreatureA
+      objectReference: {fileID: 0}
+    - target: {fileID: 641757540155703832, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
+      propertyPath: m_TagString
+      value: Unit
       objectReference: {fileID: 0}
     - target: {fileID: 2777391555458561495, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_Enabled
