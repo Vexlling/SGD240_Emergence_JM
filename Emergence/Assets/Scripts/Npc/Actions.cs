@@ -78,6 +78,8 @@ public class Actions : MonoBehaviour
                 pathFinder.SetNewDestination(startCords, targetCords);
                 RecalculatePath(true);
 
+                //trackers.CalculatePrxoimity();
+
                 movedOnce = true;
 
                 //Debug.LogWarning("StartCords = " + startCords);

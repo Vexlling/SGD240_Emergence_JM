@@ -2917,7 +2917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab:
   - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
-  maxPopulation: 5
+  maxPopulation: 4
   initialSpawnSize: 2
   spawnInterval: 0.8
   mother: {fileID: 1295512765}

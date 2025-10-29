@@ -13,27 +13,36 @@ public class Unit : MonoBehaviour
     [HideInInspector] public int hierarchicalCost;
 
     [SerializeField] private int nutritionalValue;
+    //[HideInInspector] public Unit connection; // for proximity // connection = hcost
+    public Dictionary<Unit, int> connections;
 
-
-    public Unit(Vector2Int location, PrefabType type, int hCost)
+    public Unit(Vector2Int location, PrefabType type, int hCost, Dictionary<Unit, int> connections)
     {
         this.location = location;
         this.type = type;
         this.hierarchicalCost = hCost;
+        this.connections = connections;
     }
 
 
-    Unit unit;
+    Unit thisUnit;
     GridManager gridManager;
-    UnitManager unitManager;
+    //UnitManager unitManager;
 
     private void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
-        unitManager = GetComponentInParent<UnitManager>();
+        //unitManager = GetComponentInParent<UnitManager>();
+        //unit = GetComponent<Unit>();
 
         // all units need to be added to the list including spores
-        unitManager.prefabsInScene.Add(unit);
+        //unitManager.prefabsInScene.Add(unit);
+        
+        //unitManager.AddConnection(unit);
+
+        CurrentLocation();
+
+        //unitManager.AddConnection(thisUnit);
     }
 
     // can't have this in NpcController if spore prefabs need access to it too.

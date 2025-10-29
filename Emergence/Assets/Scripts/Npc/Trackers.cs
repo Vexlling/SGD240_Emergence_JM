@@ -43,6 +43,7 @@ public class Trackers : MonoBehaviour
     public List<Unit> proximity = new List<Unit>();
 
 
+
     UnitManager unitManager;
 
     void Start()
@@ -50,6 +51,8 @@ public class Trackers : MonoBehaviour
         unitManager = GetComponentInParent<UnitManager>(); // not sure this works
         //thisNpc = GetComponent<NpcController>();
         thisUnit = GetComponent<Unit>();
+
+        //List<Unit> proximity = unitManager.prefabsInScene;
     }
 
 
@@ -63,21 +66,25 @@ public class Trackers : MonoBehaviour
 
     }
 
+    /*
     public void CalculatePrxoimity() // only needs to be called once per run or per decision
     {
-        List<Unit> proximity = unitManager.prefabsInScene;
+        //List<Unit> proximity = unitManager.prefabsInScene;
+        // get reference to public prefabs in scene list
 
         if (proximity.Contains(thisUnit) )
         {
             proximity.Remove(thisUnit);
         }
-
+        Debug.Log("proximity = " + proximity.Count);
         if (proximity.Count > 0)
         {
             UpdateProximity();
+            closestProx = proximity.First();
+            //Debug.Log("closestProx = " + closestProx);
         }
-
-        return;
+        
+       // return;
         // this method could run into the error of new prefabs being added to the orginal list
         // which this personal list won't pick up on
         // or even run into the issue of another prefab already being eaten
@@ -88,23 +95,26 @@ public class Trackers : MonoBehaviour
         foreach (Unit entry in proximity)
         {
             entry.hierarchicalCost = (Math.Abs(thisUnit.location.x - unit.location.x) + Math.Abs(thisUnit.location.y - unit.location.y)) * 10;
-            continue;
+            //continue;
+            Debug.Log("hierarchicalCost = " + entry.hierarchicalCost);
         }
         
         proximity.OrderBy(n => n.hierarchicalCost).ToList(); // ascending?
 
-        closestProx = proximity.First();
-        /*
+       // closestProx = proximity.First();
+        //Debug.Log("closestProx = " + closestProx);
+        
         // closestProx = proximity.FindIndex.Any(thisNpc.willEat);
         if (proximity.Contains(thisNpc.desired)
         {
             desiredProx = proximity.Where(npc => npc.body == thisNpc.desired).First();
         }
-        else { desiredProx = null; }*/
+        else { desiredProx = null; }
 
         //thisNpc.willEat
         //thisNpc.desired
 
         // variable = List[0]
-    }
+        
+    }*/
 }

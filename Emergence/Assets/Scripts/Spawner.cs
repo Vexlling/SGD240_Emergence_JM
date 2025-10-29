@@ -11,6 +11,8 @@ using UnityEngine.SceneManagement;
 public class Spawner : MonoBehaviour
 {
 
+    // might have to be redone
+
     [SerializeField] private GameObject[] prefab;
     [SerializeField] private int maxPopulation;
     [SerializeField] private int initialSpawnSize;
@@ -37,6 +39,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject mother;
     //UnitManager unitManager;
 
+
+    // if entry.location in prefabsinscene == gridnode.cords
+    // then gridnode.IsEmpty = false; 
 
     private void Awake()
     {

@@ -30,6 +30,7 @@ public class NpcController : MonoBehaviour
     NpcController thisNpc;
     GameObject body;
 
+    Unit thisUnit;
 
     UnitManager unitManager;
 
@@ -40,13 +41,6 @@ public class NpcController : MonoBehaviour
     // Actions actions
     UtilityAi utilityAi;
 
-
-    /*public Unit(Vector2Int location, bool walkable)
-    {
-        //this.GameObject = cords;
-        this.location = location;
-        return;
-    */
 
     void Start()
     {
@@ -59,8 +53,9 @@ public class NpcController : MonoBehaviour
         unitManager = GetComponentInParent<UnitManager>();
 
         body = GetComponent<GameObject>();
-        
-        
+
+        thisUnit = GetComponent<Unit>();
+        unitManager.AddConnection(thisUnit);
         //unitManager.prefabsInScene.Add(thisNpc);
     }
 

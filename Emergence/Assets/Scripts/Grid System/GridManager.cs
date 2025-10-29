@@ -11,7 +11,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] int unityGridSize;
     public int UnityGridSize { get { return unityGridSize; } }
 
-    private Dictionary<Vector2Int, GridNode> grid = new Dictionary<Vector2Int, GridNode>(); // might need to be public too
+    private Dictionary<Vector2Int, GridNode> grid = new Dictionary<Vector2Int, GridNode>(); 
     public Dictionary<Vector2Int, GridNode> Grid {  get { return grid; } } 
 
     private void Awake()

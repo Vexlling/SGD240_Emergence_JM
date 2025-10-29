@@ -8,7 +8,7 @@ public class GridPathfinding : MonoBehaviour
     // Based on "Unity Grid Based Movement System: Part 2 Breadth First Search" by StringCode
     // Some Code adapted from "6.10 Unity Tower defense tutorial - Corner cutting" by inScope Studios
 
-    // Will need to made for individuality
+
 
     [SerializeField] Vector2Int startCords;
     public Vector2Int StartCords { get { return startCords; } }
