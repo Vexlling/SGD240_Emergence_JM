@@ -7,42 +7,44 @@ public class Unit : MonoBehaviour
     // script for all prefabs
 
     
-    [SerializeField] private PrefabType type;
+    public PrefabType type;
+    [SerializeField] private int nutritionalValue; // might have to public
 
     public Vector2Int location; // hide later when functionality is proven
     [HideInInspector] public int hierarchicalCost;
 
-    [SerializeField] private int nutritionalValue;
-    //[HideInInspector] public Unit connection; // for proximity // connection = hcost
-    public Dictionary<Unit, int> connections;
+    /*[HideInInspector] public int hCost() // privatising
+    {
+        return hierarchicalCost;
+    }*/
 
-    public Unit(Vector2Int location, PrefabType type, int hCost, Dictionary<Unit, int> connections)
+
+    public List<Unit> connections; // for proximity
+
+    public Unit(Vector2Int location, PrefabType type, int hCost, List<Unit> connections, int pips)
     {
         this.location = location;
         this.type = type;
         this.hierarchicalCost = hCost;
         this.connections = connections;
+        this. nutritionalValue = pips;
     }
 
 
     Unit thisUnit;
     GridManager gridManager;
-    //UnitManager unitManager;
+    UnitManager unitManager;
 
     private void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
-        //unitManager = GetComponentInParent<UnitManager>();
-        //unit = GetComponent<Unit>();
-
-        // all units need to be added to the list including spores
-        //unitManager.prefabsInScene.Add(unit);
-        
-        //unitManager.AddConnection(unit);
+        unitManager = GetComponentInParent<UnitManager>();
+        thisUnit = GetComponent<Unit>();
 
         CurrentLocation();
 
-        //unitManager.AddConnection(thisUnit);
+        // all units need to be added to the list including spores
+        unitManager.AddToQueue(thisUnit);
     }
 
     // can't have this in NpcController if spore prefabs need access to it too.

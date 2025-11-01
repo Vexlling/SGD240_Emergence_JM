@@ -1,23 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
+public enum PrefabType
+{
+    A,
+    B,
+    Spore
+}
+
 public class UnitManager : MonoBehaviour
 {
-    // should the PrefabType enum be here since there will only ever be one UnitManager?
-
 
     // GameObject list of Spores, A & B
-    public List<Unit> prefabsInScene = new List<Unit>();
+    private List<Unit> prefabsInScene = new List<Unit>();
+
+    private Queue<Unit> newUnitQueue = new Queue<Unit>();
 
     //private List<Unit> prefabsInScene = new List<Unit>();
     //public List<Unit> PrefabsInScene { get { return prefabsInScene; } }
 
     NpcController npc;
     Unit unit;
-    //Unit newUnit;
     Spawner spawner;
 
     //List<GridNode> positions = new List<GridNode>();
@@ -25,76 +33,113 @@ public class UnitManager : MonoBehaviour
     // if a spore is eaten remove from 
     // RemoveEaten(GridNode node);
 
+    //int hCost;
 
     void Start()
     {
         unit = GetComponent<Unit>();
-        npc = GetComponent<NpcController>();
-        //Debug.Log("prefabs in list = " + prefabsInScene.Count);   
-        
+        npc = GetComponent<NpcController>();  
     }
 
     void Update()
     {
         //Debug.Log("prefabs in list = " + prefabsInScene.Count);
 
-        UpdateHCost();
+        if (newUnitQueue.Count > 0)
+        {
+            AddConnection();
+        }
+        //UpdateHCost();
     }
-    private void UpdateHCost()
+    /*private void UpdateHCost()
     {
+        foreach (Unit unit in prefabsInScene)
+        {
+            if (unit.connections.Count > 0) 
+            {
+                foreach (Unit entry in unit.connections)
+                {
+                    entry.hierarchicalCost = GetHCost(unit, entry);
+
+                }
+            }
+        }
+
         //for each connection in prefabs
         // if parent location dosen't equal previouse parent location then
         // re calculate connection hCost
-
+        
         // continue
+    }*/
+
+
+    // Public Function so Queue and PrefabsInScene List can be kept private
+    public void AddToQueue(Unit newUnit) //Queue needed because everyone trying to use AddConnection() at once was causing issues.
+    {
+        newUnitQueue.Enqueue(newUnit);
+        Debug.Log("EnQueued");
     }
 
-    public void AddConnection(Unit newUnit)
+    private void AddConnection()
     {
-        // when called add the unit to private prefabs in scene list
+        // when called add the unit to prefabs in scene list
         // establish a connection to all existing units in list
+        
+        Unit newUnit = newUnitQueue.First();
 
-        if (prefabsInScene.Count > 0)
+        if (prefabsInScene.Count > 0) // so first unit can just be added to the list without the fluff
         {
             foreach (Unit entry in prefabsInScene)
             {
-                //int hCost = (Math.Abs(newUnit.location.x - entry.location.x) + Math.Abs(newUnit.location.y - entry.location.y)) * 10;
-                int hCost = GetHCost(newUnit, entry);
-                newUnit.connections.Add(entry, hCost);
-                if (!entry.connections.ContainsKey(newUnit))
+                // When .connections was a dictionary:
+                //hCost = GetHCost(newUnit, entry);
+                //newUnit.connections.Add(entry, GetHCost(newUnit, entry));
+
+                newUnit.connections.Add(entry);
+                
+                if (!entry.connections.Contains(newUnit))
                 {
-                    entry.connections.Add(newUnit, hCost);
+                    entry.connections.Add(newUnit);
                 }
 
+                //Debug.Log("NewUnit: " + newUnit.type);
                 continue;
             }
         }
 
         prefabsInScene.Add(newUnit);
+        newUnitQueue.Dequeue();
+        Debug.Log("DeQueued");
 
-        Debug.Log("location = " + newUnit.location + "prefabs in list = " + prefabsInScene.Count);
+        //Debug.Log("location = " + newUnit.location + "prefabs in list = " + prefabsInScene.Count);
     }
-    public int GetHCost(Unit A, Unit B)
+
+    /*public int GetHCost(Unit A, Unit B)
     {
         int hValue = (Math.Abs(A.location.x - B.location.x) + Math.Abs(A.location.y - B.location.y)) * 10;
 
         return hValue;
-    }
+    }*/
 
-    // for each unit in list 
-    // add connection to newUnit
+
 
     
 
     public void RemoveConnection(Unit deadUnit)
     {
         // when called remove unit from prefabs list
-        // which in theory should severe connections too?
-        
-        // for each connection in deadUnit
-        // remove connection
+
+        foreach (Unit entry in prefabsInScene)
+        {
+            if (entry.connections.Contains(deadUnit))
+            {
+                entry.connections.Remove(deadUnit);
+            }
+
+            continue;
+        }
+
+        prefabsInScene.Remove(deadUnit);
 
     }
 }
-
-// connection should hold end A & end B + the shared hCost

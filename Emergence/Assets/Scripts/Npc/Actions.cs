@@ -70,15 +70,7 @@ public class Actions : MonoBehaviour
         //{
             if (spawner.groupSpawned && !movedOnce)
             {
-
-                Vector2Int targetCords = /*trackers.closestProx.location*/ positions[0].cords; // first spawned spore in scene regardless of proximity
-                Vector2Int startCords = new Vector2Int((int)prefab.transform.position.x, (int)prefab.transform.position.y) / gridManager.UnityGridSize;
-                // current position
-
-                pathFinder.SetNewDestination(startCords, targetCords);
-                RecalculatePath(true);
-
-                //trackers.CalculatePrxoimity();
+                LocateTarget(unit.location);
 
                 movedOnce = true;
 
@@ -137,6 +129,26 @@ public class Actions : MonoBehaviour
             // destroy collided
     }
 
+
+
+    //                       //
+    // ==== Pathfinding ==== //
+    //                       //
+
+    public void LocateTarget(Vector2Int location)
+    {
+        // Vector2Int targetCords = /*trackers.closestProx.location*/ positions[0].cords; // first spawned spore in scene regardless of proximity
+        Vector2Int targetCords = location;
+
+        Vector2Int startCords = new Vector2Int((int)prefab.transform.position.x, (int)prefab.transform.position.y) / gridManager.UnityGridSize;
+        // current position
+
+        pathFinder.SetNewDestination(startCords, targetCords);
+        RecalculatePath(true);
+
+        //trackers.CalculatePrxoimity();
+    }
+
     void RecalculatePath(bool resetPath)
     {
         //Debug.Log("Recalculate path called");
@@ -175,7 +187,7 @@ public class Actions : MonoBehaviour
 
                 unit.CurrentLocation();
             }
-        }
-        
+        }   
     }
+
 }

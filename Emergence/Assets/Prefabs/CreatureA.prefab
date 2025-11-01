@@ -140,6 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f0c10e34c74a1499eb054b059cc135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionsAvailable:
+  - {fileID: 11400000, guid: 57d0ce6f3520f6a49aebb90ca38155c1, type: 2}
+  - {fileID: 11400000, guid: 2efe88ff027a5644e857289e41d520fc, type: 2}
+  - {fileID: 11400000, guid: a1092d27917e0204a94458b12506259b, type: 2}
   maxHunger: 100
   willEat: 0200000000000000
   desired: 2

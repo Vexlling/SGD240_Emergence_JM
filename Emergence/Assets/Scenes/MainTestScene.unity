@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: m_Enabled
@@ -414,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: m_Enabled
@@ -652,6 +652,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
+      propertyPath: cords.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -767,7 +771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
@@ -1621,7 +1625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
@@ -1738,7 +1742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
@@ -2917,8 +2921,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab:
   - {fileID: 1200796470807263778, guid: c63a5eb6ae74f9f4c98e891440ead8a6, type: 3}
-  maxPopulation: 4
-  initialSpawnSize: 2
+  maxPopulation: 5
+  initialSpawnSize: 1
   spawnInterval: 0.8
   mother: {fileID: 1295512765}
 --- !u!1001 &1298526582
@@ -3230,7 +3234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: m_Enabled
@@ -3343,7 +3347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.x
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
@@ -3714,7 +3718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: m_Enabled
@@ -3827,7 +3831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
@@ -4436,7 +4440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: cords.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: m_Enabled
@@ -4578,6 +4582,14 @@ PrefabInstance:
     - target: {fileID: 3985384527035632909, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7898881785889187835, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
+      propertyPath: location.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7898881785889187835, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
+      propertyPath: location.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8399370034923687230, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: bravery
@@ -4892,6 +4904,10 @@ PrefabInstance:
     - target: {fileID: 2756720208950210762, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: m_VerticalAlignment
       value: 8192
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
+      propertyPath: cords.x
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6030508457376174753, guid: fa0ffd15f008d8b4191d73bd9c601f11, type: 3}
       propertyPath: m_Enabled
