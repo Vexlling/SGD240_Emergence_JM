@@ -9,7 +9,7 @@ public class EatClosest : Action
     {
         // execute action here
         npc.DoEatClosest(1);
-        npc.maxHunger -= 10;
+        npc.hunger -= 10;
         Debug.Log("Just Ate 1 closest");
         // logic for updating everything involved with eating desired
 

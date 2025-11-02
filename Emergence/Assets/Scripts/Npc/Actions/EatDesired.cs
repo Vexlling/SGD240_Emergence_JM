@@ -10,8 +10,8 @@ public class EatDesired : Action
     {
         // execute action here
         npc.DoEatDesired(1);
-        npc.maxHunger -= 1;
-        Debug.Log("Just Ate 1 desired");
+        npc.hunger -= 1;
+        Debug.Log("Just Ate 1 desired, hunger: "+ npc.hunger);
 
         // logic for updating everything involved with eating desired
 

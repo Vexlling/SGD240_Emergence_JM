@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class Trackers : MonoBehaviour
 {
+    // Trackers script only for  
+
 
     // track state scores
     // track consideration scores
@@ -37,8 +39,8 @@ public class Trackers : MonoBehaviour
     private Unit unit;
     private Unit thisUnit;
 
-    Unit closestProx;
-    Unit desiredProx;
+    Unit closest;
+    Unit desired;
 
     [HideInInspector] public List<Unit> proximity = new List<Unit>();
 

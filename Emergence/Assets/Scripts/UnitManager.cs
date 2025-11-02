@@ -33,7 +33,7 @@ public class UnitManager : MonoBehaviour
     // if a spore is eaten remove from 
     // RemoveEaten(GridNode node);
 
-    //int hCost;
+
 
     void Start()
     {
@@ -49,32 +49,12 @@ public class UnitManager : MonoBehaviour
         {
             AddConnection();
         }
-        //UpdateHCost();
     }
-    /*private void UpdateHCost()
-    {
-        foreach (Unit unit in prefabsInScene)
-        {
-            if (unit.connections.Count > 0) 
-            {
-                foreach (Unit entry in unit.connections)
-                {
-                    entry.hierarchicalCost = GetHCost(unit, entry);
-
-                }
-            }
-        }
-
-        //for each connection in prefabs
-        // if parent location dosen't equal previouse parent location then
-        // re calculate connection hCost
-        
-        // continue
-    }*/
+   
 
 
     // Public Function so Queue and PrefabsInScene List can be kept private
-    public void AddToQueue(Unit newUnit) //Queue needed because everyone trying to use AddConnection() at once was causing issues.
+    public void AddToQueue(Unit newUnit) //Queue needed because everyone trying to access AddConnection() at once was causing issues.
     {
         newUnitQueue.Enqueue(newUnit);
         Debug.Log("EnQueued");
@@ -87,13 +67,13 @@ public class UnitManager : MonoBehaviour
         
         Unit newUnit = newUnitQueue.First();
 
+        newUnit.CurrentLocation(); // needs to be here for prefabs starting with the scene, so they don't register as 0,0
+        //Debug.Log("location: "+newUnit.location);
+
         if (prefabsInScene.Count > 0) // so first unit can just be added to the list without the fluff
         {
             foreach (Unit entry in prefabsInScene)
             {
-                // When .connections was a dictionary:
-                //hCost = GetHCost(newUnit, entry);
-                //newUnit.connections.Add(entry, GetHCost(newUnit, entry));
 
                 newUnit.connections.Add(entry);
                 
@@ -122,19 +102,6 @@ public class UnitManager : MonoBehaviour
     }*/
 
 
-
-    // collision event to feed in the atacker and atackee
-    // something like 
-    public void Eat(Unit preditor, Unit prey)
-    {
-        // on collision
-        // add prey.nutritionalValue to preditor's maxHunger
-        // deal 1 damage to prey
-        // if prey's health drops to 0 
-        // then prey destroys itself from unit's script
-    }
-
-
     public void RemoveConnection(Unit deadUnit)
     {
         // when called remove unit from prefabs list
@@ -153,5 +120,18 @@ public class UnitManager : MonoBehaviour
 
         // if unit's health drops to 0
         // then destroy unit from unit's script
+    }
+
+    // collision event to feed in the atacker and atackee
+    // something like 
+    public void Eat(Unit preditor, Unit prey)
+    {
+        // on collision
+        // add prey.nutritionalValue to preditor's maxHunger
+        // deal 1 damage to prey
+        // if prey's health drops to 0 
+        // then prey destroys itself from unit's script
+
+        //preditor.maxHunger = 
     }
 }

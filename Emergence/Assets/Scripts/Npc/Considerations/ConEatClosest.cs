@@ -15,7 +15,7 @@ public class ConEatClosest : Consideration
 
         // if this action is already chosen then + 0.1
 
-        score = hungerVsClosestCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // replace 100f with cloest aprrox percentage
+        score = hungerVsClosestCurve.Evaluate(Mathf.Clamp01(npc.hunger / 100f)); // replace 100f with cloest aprrox percentage
 
         return score;
     }

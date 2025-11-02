@@ -6,29 +6,27 @@ using UnityEngine;
 public class NpcController : MonoBehaviour
 {
     // script for moving prefabs only
-        // Hub for internal parts to communicate and interact with each other
+    //// Hub for internal parts to communicate and interact with each other
 
- 
+
+    // for actions
     public Action[] actionsAvailable;
-
-    [SerializeField] private float movementSpeed = 2.0f;
-
-    bool movedOnce = false;
-    Transform prefab;
-    List<GridNode> path = new List<GridNode>();
-    Spawner spawner;
-
-
-    // set target cords to check pathfinder is working
-    public Vector2Int temp;
-
-
-    [SerializeField] public int maxHunger = 100;
+    public int hunger; // main needs to be in unit class so this is only a reference
     public int tempClosest = 10;
     public int tempDesired = 10;
-    
-    // displays actions of a specific prefab
-    public string chosenAction;
+
+        // displays actions of a specific prefab
+        public string chosenAction;
+
+
+
+    // for movement
+    [SerializeField] private float movementSpeed = 2.0f;
+    List<GridNode> path = new List<GridNode>();
+
+        // set target cords to check pathfinder is working
+        public Vector2Int temp;
+
 
 
     // Inspector tweakable, read only for other scripts
@@ -39,19 +37,19 @@ public class NpcController : MonoBehaviour
     public PrefabType desired { get; private set; }
 
 
-    //NpcController thisNpc; just use 'this'
-    GameObject body;
 
-    Unit thisUnit;
-    UnitManager unitManager;
-
-    GridManager gridManager;
+    // personal ref
     GridPathfinding pathfinder;
-    //GridAStar pathfinder; 
-
     UtilityAi utilityAi;
 
+    Spawner spawner;
+    Transform prefab;
 
+    GridManager gridManager;
+    UnitManager unitManager;
+    Unit thisUnit;
+
+    
 
     void Start()
     {
@@ -61,19 +59,12 @@ public class NpcController : MonoBehaviour
         spawner = GetComponentInParent<Spawner>();
         prefab = GetComponent<Transform>();
 
-
         gridManager = FindObjectOfType<GridManager>();
-        
-        //pathFinder = GetComponent<GridAStar>();
-
-        
         unitManager = GetComponentInParent<UnitManager>();
-
-        body = GetComponent<GameObject>();
-
         thisUnit = GetComponent<Unit>();
-        //unitManager.AddConnection(thisUnit);
-        //unitManager.prefabsInScene.Add(thisNpc);
+
+
+        //UpdateHunger();
 
         // assaigning static values
         willEat = WillEat;
@@ -96,15 +87,20 @@ public class NpcController : MonoBehaviour
 
         //CurrentLocation();
 
-        if (spawner.groupSpawned && !movedOnce)
+        if (spawner.groupSpawned /*&& !movedOnce*/)
         {
             LocateTarget(temp);
 
-            movedOnce = true;
+           // movedOnce = true;
 
             //Debug.LogWarning("StartCords = " + startCords);
             //Debug.LogWarning("targetCords = " + targetCords);
         }
+    }
+
+    public void UpdateHunger()
+    {
+        //hunger = thisUnit.maxHunger;
     }
 
     public void OnFinishedAction()
