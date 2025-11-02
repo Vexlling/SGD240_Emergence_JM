@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Hunger", menuName = "UtilityAI/Considerations/Hunger")]
-public class Hunger : Consideration
+[CreateAssetMenu(fileName = "ConIdle", menuName = "UtilityAI/Considerations/ Idle Con")]
+
+public class ConIdle : Consideration
 {
     [SerializeField] private AnimationCurve responseCurve;
     public override float ScoreConsideration(NpcController npc)
     {
-        score = responseCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f));
+        score = responseCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // constant or fall back option
+
         return score;
     }
-
- 
 }

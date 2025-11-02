@@ -14,6 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: EatDesired
   considerations:
-  - {fileID: 11400000, guid: 95c080a4e32c9134d81b02cd8e2acf3a, type: 2}
-  - {fileID: 11400000, guid: 071112d6a6f54c74ba8aa7dcd5ebc446, type: 2}
-  - {fileID: 11400000, guid: ee73d254884353a46a180ec555cb76da, type: 2}
+  - {fileID: 11400000, guid: fdb270455c5b8984991d7efb8cc25627, type: 2}

@@ -123,7 +123,17 @@ public class UnitManager : MonoBehaviour
 
 
 
-    
+    // collision event to feed in the atacker and atackee
+    // something like 
+    public void Eat(Unit preditor, Unit prey)
+    {
+        // on collision
+        // add prey.nutritionalValue to preditor's maxHunger
+        // deal 1 damage to prey
+        // if prey's health drops to 0 
+        // then prey destroys itself from unit's script
+    }
+
 
     public void RemoveConnection(Unit deadUnit)
     {
@@ -141,7 +151,7 @@ public class UnitManager : MonoBehaviour
 
         prefabsInScene.Remove(deadUnit);
 
-        // destroy prefab here or in another script?
-        // can't entirely be done from the npc controller because the spore doesn't have access to it
+        // if unit's health drops to 0
+        // then destroy unit from unit's script
     }
 }

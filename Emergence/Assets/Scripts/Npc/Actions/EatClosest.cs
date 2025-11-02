@@ -11,10 +11,13 @@ public class EatClosest : Action
         npc.DoEatClosest(1);
         npc.maxHunger -= 10;
         Debug.Log("Just Ate 1 closest");
-        // logic for updating everything involved with eating
+        // logic for updating everything involved with eating desired
 
-        // takes in hscore for Desired + Closest and evaluates the difference in distance
-        // taking into account the hunger response curve to calculate target
+
+        // set target cords to that of the proxDesired unit
+
+        // on collision with target deal 1 damage point, take nutritional value and add to hunger
+        // * target being dealt damage either dies off or takes a hit to health
 
         npc.OnFinishedAction();
     }

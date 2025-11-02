@@ -68,7 +68,7 @@ public class GridManager : MonoBehaviour
         position.x = coordinates.x * unityGridSize;
         position.y = coordinates.y * unityGridSize; // changed from position.z
 
-        return position; // CS0161 Error: not all code paths return a value
+        return position; 
     }
 
     private void CreateGrid()

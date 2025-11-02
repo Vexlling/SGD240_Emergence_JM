@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 924838975449420738}
   - component: {fileID: 1808560194086691738}
   - component: {fileID: -5515706601468304988}
-  - component: {fileID: 7212968533759731004}
   m_Layer: 0
   m_Name: CreatureB
   m_TagString: Unit
@@ -123,10 +122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792ab4f79b134224eb9b0199fbe36642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  Type: 1
+  nutritionalValue: 0
   location: {x: 0, y: 0}
   hierarchicalCost: 0
-  nutritionalValue: 0
+  health: 2
+  connections: []
 --- !u!114 &924838975449420738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,9 +155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f0c10e34c74a1499eb054b059cc135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionsAvailable: []
+  movementSpeed: 1
+  temp: {x: 0, y: 0}
   maxHunger: 1
-  willEat: 0200000000000000
-  desired: 0
+  tempClosest: 10
+  tempDesired: 10
+  chosenAction: 
+  WillEat: 0000000002000000
+  Desired: 0
 --- !u!114 &-5515706601468304988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,22 +171,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2525889993887320109}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92b75b088050764419e35e38253cdf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   proximity: []
---- !u!114 &7212968533759731004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2525889993887320109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab73d36ca6660d4993bbb079e07ba45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 1

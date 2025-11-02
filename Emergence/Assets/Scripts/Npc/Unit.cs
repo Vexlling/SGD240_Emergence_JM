@@ -6,50 +6,72 @@ public class Unit : MonoBehaviour
 {
     // script for all prefabs
 
-    
-    public PrefabType type;
-    [SerializeField] private int nutritionalValue; // might have to public
 
+    // Variables tweakable by the Inspector, but read only for other scripts
+    [SerializeField] private PrefabType Type;
+    public PrefabType type { get; private set; }
+
+
+    [SerializeField] private int nutritionalValue; 
+    public int nValue { get; private set; }
+
+
+    // Fully public 
     public Vector2Int location; // hide later when functionality is proven
     [HideInInspector] public int hierarchicalCost;
 
-    /*[HideInInspector] public int hCost() // privatising
+    public int health; // spore = 1, other = 2, so eating bigger take a little longer, which could give them enough hunger to nibble then run away.
+
+    public List<Unit> connections; // for proximity // hide later when functionality is proven
+
+    public Unit(PrefabType type, int pips, Vector2Int location, int hCost, List<Unit> connections, int health)
     {
-        return hierarchicalCost;
-    }*/
-
-
-    public List<Unit> connections; // for proximity
-
-    public Unit(Vector2Int location, PrefabType type, int hCost, List<Unit> connections, int pips)
-    {
-        this.location = location;
+        // static
         this.type = type;
+        this.nValue = pips;
+
+        // fluid
+        this.location = location;
         this.hierarchicalCost = hCost;
         this.connections = connections;
-        this.nutritionalValue = pips;
+        this.health = health;
     }
 
-
-    Unit thisUnit; // will using just 'this' work?
     GridManager gridManager;
     UnitManager unitManager;
 
     private void Start()
     {
+        // assaigning static values
+        nValue = nutritionalValue;
+        type = Type;
+        //Debug.Log("nValue: "+nValue);
+
         gridManager = FindObjectOfType<GridManager>();
         unitManager = GetComponentInParent<UnitManager>();
-        thisUnit = GetComponent<Unit>();
 
-        CurrentLocation();
 
-        // all units need to be added to the list including spores
-        unitManager.AddToQueue(thisUnit);
+        CurrentLocation(); // might need this on awake for prefabs there on start
+
+        unitManager.AddToQueue(this);
     }
 
-    // can't have this in NpcController if spore prefabs need access to it too.
     public void CurrentLocation()
     {
         location = gridManager.GetCoordinatesFromPosition(transform.position);
     }
+
+
+    // put logic here for when unit's health == 0;
+    // something like
+    public void UnitDeath()
+    {
+        if (health <= 0) // health should never drop negative, but just in case
+        {
+            unitManager.RemoveConnection(this);
+            Debug.Log("unit " + this.type + " has died");
+            // destroy prefab
+        }
+    }
+
 }

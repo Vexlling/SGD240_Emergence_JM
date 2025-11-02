@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Idle
   considerations:
-  - {fileID: 11400000, guid: 95c080a4e32c9134d81b02cd8e2acf3a, type: 2}
+  - {fileID: 11400000, guid: 226f4284b733af64a89a8d3562cf7a4d, type: 2}
