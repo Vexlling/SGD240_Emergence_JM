@@ -16,13 +16,18 @@ public class Unit : MonoBehaviour
     public int nValue { get; private set; }
 
 
+
     // Fully public 
-    public Vector2Int location; // hide later when functionality is proven
-    [HideInInspector] public int hierarchicalCost;
 
     public int health; // spore = 1, other = 2, so eating bigger take a little longer, which could give them enough hunger to nibble then run away.
 
-    public List<Unit> connections; // for proximity // hide later when functionality is proven
+    // for distance calc
+    public Vector2Int location; // hide later
+    [HideInInspector] public int hierarchicalCost;
+    public List<Unit> connections; // for proximity // hide later 
+
+    
+    
 
     public Unit(PrefabType type, int pips, Vector2Int location, int hCost, List<Unit> connections, int health)
     {
@@ -51,7 +56,7 @@ public class Unit : MonoBehaviour
         unitManager = GetComponentInParent<UnitManager>();
 
 
-        CurrentLocation(); // might need this on awake for prefabs there on start
+        //CurrentLocation(); // moved to AddConnections function in UnitManager
 
         unitManager.AddToQueue(this);
     }

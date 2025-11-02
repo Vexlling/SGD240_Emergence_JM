@@ -18,18 +18,13 @@ public class UtilityAi : MonoBehaviour
     private float intimidation;
     private float bravery;
 
-    
-    public Action bestAction { get; set; }
-    //ActionType actions;
+
+    // for actions
+    public Action bestAction;
     NpcController npc;
-    public bool finishedDeciding { get; set; }
+    public bool finishedDeciding;
 
 
-
-
-
-    // Score Actions function
-    // Choose best Action function
 
     void Start()
     {
@@ -73,7 +68,7 @@ public class UtilityAi : MonoBehaviour
         return output;
     }
 
-    public void DecideBestAction(Action[] actionsAvailable) // might change to private if possible // Actions [] = actions switch cases
+    public void DecideBestAction(Action[] actionsAvailable) // needs to be public
     {
         float score = 0f;
         int nextBestActionIndex = 0;
@@ -93,7 +88,7 @@ public class UtilityAi : MonoBehaviour
         finishedDeciding = true;
     }
 
-    public float ScoreAction(Action action) // might change to private if possible
+    public float ScoreAction(Action action) // needs to be public 
     {
         float score = 1f;
         for (int i = 0; i < action.considerations.Length; i++)

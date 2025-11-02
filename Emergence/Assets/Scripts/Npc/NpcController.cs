@@ -6,29 +6,29 @@ using UnityEngine;
 public class NpcController : MonoBehaviour
 {
     // script for moving prefabs only
-        // Hub for internal parts to communicate and interact with each other
+    //// Hub for internal parts to communicate and interact with each other
 
  
+    // for actions
     public Action[] actionsAvailable;
-
-    [SerializeField] private float movementSpeed = 2.0f;
-
-    bool movedOnce = false;
-    Transform prefab;
-    List<GridNode> path = new List<GridNode>();
-    Spawner spawner;
-
-
-    // set target cords to check pathfinder is working
-    public Vector2Int temp;
-
-
     [SerializeField] public int maxHunger = 100;
     public int tempClosest = 10;
     public int tempDesired = 10;
+
+        // displays actions of a specific prefab
+        public string chosenAction;
+
+
+    // for movement
+    [SerializeField] private float movementSpeed = 2.0f;
+    List<GridNode> path = new List<GridNode>();
     
-    // displays actions of a specific prefab
-    public string chosenAction;
+    bool movedOnce = false;
+
+        // set target cords to check pathfinder is working
+        public Vector2Int temp;
+
+
 
 
     // Inspector tweakable, read only for other scripts
@@ -39,41 +39,37 @@ public class NpcController : MonoBehaviour
     public PrefabType desired { get; private set; }
 
 
-    //NpcController thisNpc; just use 'this'
-    GameObject body;
 
+    // refs
+    UtilityAi utilityAi;
+    GridPathfinding pathfinder;
+        //GridAStar pathfinder; 
+    
     Unit thisUnit;
     UnitManager unitManager;
-
     GridManager gridManager;
-    GridPathfinding pathfinder;
-    //GridAStar pathfinder; 
 
-    UtilityAi utilityAi;
+    Transform prefab;
+
+    Spawner spawner;
 
 
 
     void Start()
     {
-        pathfinder = GetComponent<GridPathfinding>();
         utilityAi = GetComponent<UtilityAi>();
-
-        spawner = GetComponentInParent<Spawner>();
-        prefab = GetComponent<Transform>();
-
-
-        gridManager = FindObjectOfType<GridManager>();
-        
-        //pathFinder = GetComponent<GridAStar>();
-
-        
-        unitManager = GetComponentInParent<UnitManager>();
-
-        body = GetComponent<GameObject>();
+        pathfinder = GetComponent<GridPathfinding>();
+        //pathfinder = GetComponent<GridAStar>();
 
         thisUnit = GetComponent<Unit>();
-        //unitManager.AddConnection(thisUnit);
-        //unitManager.prefabsInScene.Add(thisNpc);
+        unitManager = GetComponentInParent<UnitManager>();
+        gridManager = FindObjectOfType<GridManager>();
+
+        prefab = GetComponent<Transform>();
+
+        spawner = GetComponentInParent<Spawner>();
+        
+
 
         // assaigning static values
         willEat = WillEat;

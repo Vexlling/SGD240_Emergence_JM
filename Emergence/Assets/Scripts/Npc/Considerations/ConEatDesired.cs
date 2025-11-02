@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ConEatDesired", menuName = "UtilityAI/Considerations/ Eat Desired Con")]
+[CreateAssetMenu(fileName = "ConEatDesired", menuName = "UtilityAI/Considerations/Eat Desired Con")]
 
 public class ConEatDesired : Consideration
 {

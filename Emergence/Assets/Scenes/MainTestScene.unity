@@ -4518,6 +4518,10 @@ PrefabInstance:
       propertyPath: temp.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -6338913689427993542, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
+      propertyPath: movementSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -3903025151541257744, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_Enabled
       value: 1
