@@ -40,7 +40,7 @@ public class Trackers : MonoBehaviour
     Unit closestProx;
     Unit desiredProx;
 
-    public List<Unit> proximity = new List<Unit>();
+    [HideInInspector] public List<Unit> proximity = new List<Unit>();
 
 
 

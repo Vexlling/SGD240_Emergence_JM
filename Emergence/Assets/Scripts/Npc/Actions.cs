@@ -15,6 +15,10 @@ public enum ActionType
 
 public class Actions : MonoBehaviour
 {
+    //                                      //
+    //      Move All to NpcController       //
+    //                                      //
+
 
     // set destination for the pathfinder
     // execute selected action

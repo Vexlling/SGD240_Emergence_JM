@@ -27,11 +27,11 @@ public class Unit : MonoBehaviour
         this.type = type;
         this.hierarchicalCost = hCost;
         this.connections = connections;
-        this. nutritionalValue = pips;
+        this.nutritionalValue = pips;
     }
 
 
-    Unit thisUnit;
+    Unit thisUnit; // will using just 'this' work?
     GridManager gridManager;
     UnitManager unitManager;
 

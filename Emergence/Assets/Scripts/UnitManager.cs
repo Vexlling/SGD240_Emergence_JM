@@ -141,5 +141,7 @@ public class UnitManager : MonoBehaviour
 
         prefabsInScene.Remove(deadUnit);
 
+        // destroy prefab here or in another script?
+        // can't entirely be done from the npc controller because the spore doesn't have access to it
     }
 }

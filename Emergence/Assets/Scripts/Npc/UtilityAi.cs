@@ -18,14 +18,15 @@ public class UtilityAi : MonoBehaviour
     private float intimidation;
     private float bravery;
 
-
-
-    NpcController npc;
-
-
-     
-    //public Action bestAction { get; set; }
+    
+    public Action bestAction { get; set; }
     //ActionType actions;
+    NpcController npc;
+    public bool finishedDeciding { get; set; }
+
+
+
+
 
     // Score Actions function
     // Choose best Action function
@@ -39,7 +40,10 @@ public class UtilityAi : MonoBehaviour
 
     void Update()
     {
-
+        if (bestAction is null)
+        {
+            DecideBestAction(npc.actionsAvailable);
+        }
     }
 
     private void TraitSetUp()
@@ -69,13 +73,53 @@ public class UtilityAi : MonoBehaviour
         return output;
     }
 
-    public void DecideBestAction(ActionType[] actionsAvailable) // might change to private if possible // Actions [] = actions switch cases
+    public void DecideBestAction(Action[] actionsAvailable) // might change to private if possible // Actions [] = actions switch cases
     {
+        float score = 0f;
+        int nextBestActionIndex = 0;
+        for (int i = 0; i < actionsAvailable.Length; i++)
+        {
+            if (ScoreAction(actionsAvailable[i]) > score)
+            {
+                nextBestActionIndex = i;
+                score = actionsAvailable[i].score;
+            }
+        }
 
+        bestAction = actionsAvailable[nextBestActionIndex];
+
+        npc.chosenAction = bestAction.ToString(); 
+
+        finishedDeciding = true;
     }
 
-    public void ScoreAction(ActionType action) // might change to private if possible
+    public float ScoreAction(Action action) // might change to private if possible
     {
+        float score = 1f;
+        for (int i = 0; i < action.considerations.Length; i++)
+        {
+            float considerationScore = action.considerations[i].ScoreConsideration(npc);
+            score *= considerationScore;
+
+            if (score == 0)
+            {
+                action.score = 0;
+                return action.score; // no point computing further
+            }
+        }
+
+        // Averaging scheme of overall score
+        // dave mark technqiue
+
+        float originalScore = score;
+        float modFactor = 1 - (1 / action.considerations.Length);
+        float makeupValue = (1 - originalScore) * modFactor;
+        action.score = originalScore + (makeupValue * originalScore);
+
+        return action.score;
+
+
+
         // input, input normalisation, reponsecurve
 
         // WANDER
