@@ -59,14 +59,14 @@ public class UnitManager : MonoBehaviour
         Debug.Log("EnQueued");
     }
 
-    private void AddConnection()
+    private void AddConnection() // the order of lines should make it so newUnits never add themselves to their connections list
     {
         // when called add the unit to prefabs in scene list
         // establish a connection to all existing units in list
         
         Unit newUnit = newUnitQueue.First();
         newUnit.CurrentLocation(); // needs to be here for prefabs starting with the scene, so they don't register as 0,0
-        Debug.Log("location: "+newUnit.location);
+        //Debug.Log("location: "+newUnit.location);
 
         if (prefabsInScene.Count > 0) // so first unit can just be added to the list without the fluff
         {
@@ -89,6 +89,7 @@ public class UnitManager : MonoBehaviour
         newUnitQueue.Dequeue();
         Debug.Log("DeQueued");
 
+        Debug.Log("Co count: " + newUnit.connections.Count);
         //Debug.Log("location = " + newUnit.location + "prefabs in list = " + prefabsInScene.Count);
     }
 
@@ -116,21 +117,20 @@ public class UnitManager : MonoBehaviour
 
         prefabsInScene.Remove(deadUnit);
 
-        // if unit's health drops to 0
-        // then destroy unit from unit's script
+        // unit class will handle the destruction
     }
 
 
-    // collision event to feed in the atacker and atackee
-    // something like 
+
     public void Eat(Unit preditor, Unit prey)
     {
         // on collision
-        // add prey.nutritionalValue to preditor's maxHunger
-        // deal 1 damage to prey
-        // if prey's health drops to 0 
-        // then prey destroys itself from unit's script
 
-        //preditor.maxHunger = 
+        preditor.hunger += prey.nValue;
+        if (preditor.hunger > 100) { preditor.hunger = 100; } // since 100 is meant to be the max
+        // npc.maxhunger
+
+        prey.health -= 1;
+        // if prey's health is 0, then unit class will initiate self destruction 
     }
 }

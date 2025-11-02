@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System.Linq;
 
 public class NpcController : MonoBehaviour
 {
@@ -15,8 +17,14 @@ public class NpcController : MonoBehaviour
     public int tempClosest = 10;
     public int tempDesired = 10;
 
-        // displays actions of a specific prefab
-        public string chosenAction;
+    Unit closestProx;
+    Unit desiredProx;
+    Unit bestUnit;
+    Unit current;
+
+    // displays actions of a specific prefab
+    public string chosenAction;
+
 
 
     // for movement
@@ -37,6 +45,8 @@ public class NpcController : MonoBehaviour
 
     [SerializeField] private PrefabType Desired;
     public PrefabType desired { get; private set; }
+
+    
 
 
 
@@ -103,10 +113,17 @@ public class NpcController : MonoBehaviour
         }
     }
 
+
+
+    //------------------//
+    //      Actions     //
+    //------------------//
+
     public void OnFinishedAction()
     {
         utilityAi.DecideBestAction(actionsAvailable);
     }
+
 
     #region Coroutine
 
@@ -206,6 +223,7 @@ public class NpcController : MonoBehaviour
         path.Clear();
         path = pathfinder.GetNewPath(coordinates);
         StartCoroutine(FollowPath());
+        //CalculateProximity();
     }
 
     // this should be worked into the actions coroutines
@@ -224,11 +242,61 @@ public class NpcController : MonoBehaviour
             {
                 travelPercent += Time.deltaTime * movementSpeed;
                 prefab.position = Vector2.Lerp(startPosition, endPosition, travelPercent); // shouldn't affect z-axis but it does
-                yield return new WaitForEndOfFrame();
 
-                thisUnit.CurrentLocation();
+                thisUnit.CurrentLocation(); // updates as unit moves
+                //CalculateProximity(); // updates as unit moves
+                
+                yield return new WaitForEndOfFrame();
             }
         }
     }
 
+
+    //--------------------//
+    //      Proximity     //
+    //--------------------//
+
+    public void CalculateProximity()
+    {
+        //Debug.Log("Proximity Calc called");
+        //Debug.Log("Co count: " + thisUnit.connections.Count);
+        if (thisUnit.connections.Count == 0) { Debug.Log("connections empty");  return; } // abort early if empty
+
+
+        foreach (Unit entry in thisUnit.connections)
+        {
+            entry.hierarchicalCost = (Math.Abs(thisUnit.location.x - entry.location.x) + Math.Abs(thisUnit.location.y - entry.location.y)) * 10;
+        }
+
+        // order list
+        thisUnit.connections.OrderBy(n => n.hierarchicalCost).ToList(); // ascending?
+        // will they reassign the hcost for all unit connections list or just for this one?
+        
+        desiredProx = thisUnit.connections.Find(n => n.type == desired); // this works
+        Debug.Log("desired type: " + desiredProx + ", hCost: " + desiredProx.hierarchicalCost);
+
+
+        //closestProx = thisUnit.connections.Any(n => n.type == willEat.Contains(type));
+        //closestProx = thisUnit.connections.Find(n => n.type == willEat[].Any);
+        //closestProx = willEat.Any(type => thisUnit.connections.Contains(unit.type));
+        //closestProx = thisUnit.connections.Any(unit.type => willEat.Contains(type));
+
+        // I know brute forcing isn't the best method, but google and unity forums weren't being too useful
+
+
+        bestUnit = null; 
+
+        // seems inefficient but couldn't get other methods to work
+        foreach (PrefabType entry in WillEat) // this works too!
+        {
+            current = thisUnit.connections.Find(n => n.type == entry);
+            if (bestUnit == null || current.hierarchicalCost < bestUnit.hierarchicalCost) // smaller the better
+            { 
+                bestUnit = current; 
+            }
+        }
+
+        closestProx = bestUnit;
+        Debug.Log("closest type: " + closestProx + ", hCost: " + closestProx.hierarchicalCost);
+    }
 }

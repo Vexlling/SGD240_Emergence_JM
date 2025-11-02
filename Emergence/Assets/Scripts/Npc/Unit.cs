@@ -20,6 +20,7 @@ public class Unit : MonoBehaviour
     // Fully public 
 
     public int health; // spore = 1, other = 2, so eating bigger take a little longer, which could give them enough hunger to nibble then run away.
+    [HideInInspector] public int hunger = 100; // spore will have this too, just ignore it for now
 
     // for distance calc
     public Vector2Int location; // hide later
@@ -29,7 +30,7 @@ public class Unit : MonoBehaviour
     
     
 
-    public Unit(PrefabType type, int pips, Vector2Int location, int hCost, List<Unit> connections, int health)
+    public Unit(PrefabType type, int pips, Vector2Int location, int hCost, List<Unit> connections, int health, int hunger)
     {
         // static
         this.type = type;
@@ -40,10 +41,12 @@ public class Unit : MonoBehaviour
         this.hierarchicalCost = hCost;
         this.connections = connections;
         this.health = health;
+        this.hunger = hunger;
     }
 
     GridManager gridManager;
     UnitManager unitManager;
+    GameObject prefab;
 
     private void Start()
     {
@@ -54,6 +57,7 @@ public class Unit : MonoBehaviour
 
         gridManager = FindObjectOfType<GridManager>();
         unitManager = GetComponentInParent<UnitManager>();
+        prefab = GetComponent<GameObject>();
 
 
         //CurrentLocation(); // moved to AddConnections function in UnitManager
@@ -61,22 +65,25 @@ public class Unit : MonoBehaviour
         unitManager.AddToQueue(this);
     }
 
+    private void Update()
+    {
+        if (health <= 0) // health should never drop negative, but just in case
+        {
+            UnitDeath();
+        }
+    }
+
     public void CurrentLocation()
     {
         location = gridManager.GetCoordinatesFromPosition(transform.position);
     }
 
-
-    // put logic here for when unit's health == 0;
-    // something like
-    public void UnitDeath()
+    private void UnitDeath() // has to be here because spore needs access to this
     {
-        if (health <= 0) // health should never drop negative, but just in case
-        {
-            unitManager.RemoveConnection(this);
-            Debug.Log("unit " + this.type + " has died");
-            // destroy prefab
-        }
+        unitManager.RemoveConnection(this);
+        // might need something here for spawner
+        Debug.Log("unit " + this.type + " has died");
+        Destroy(prefab); // only this class will be able to destroy the prefab, other scripts can only set unit health to 0
     }
 
 }

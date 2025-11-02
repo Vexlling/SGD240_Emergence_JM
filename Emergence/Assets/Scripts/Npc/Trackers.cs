@@ -9,6 +9,12 @@ using UnityEngine;
 public class Trackers : MonoBehaviour
 {
 
+    // Despite npc controller feeling a little bloated, proximity calculations will be made in there
+    // for easy access to willEat and desired as well as being able to feed that into the consideration scores and setting destination
+
+
+
+
     // track state scores
     // track consideration scores
 
@@ -37,8 +43,8 @@ public class Trackers : MonoBehaviour
     private Unit unit;
     private Unit thisUnit;
 
-    Unit closestProx;
-    Unit desiredProx;
+    //Unit closestProx;
+    //Unit desiredProx;
 
     [HideInInspector] public List<Unit> proximity = new List<Unit>();
 
@@ -58,16 +64,11 @@ public class Trackers : MonoBehaviour
 
     void Update()
     {
-        UpdateHunger();
-    }
-
-    private void UpdateHunger()
-    {
 
     }
 
-    /*
-    public void CalculatePrxoimity() // only needs to be called once per run or per decision
+    
+    /*public void CalculatePrxoimity() // only needs to be called once per run or per decision
     {
         //List<Unit> proximity = unitManager.prefabsInScene;
         // get reference to public prefabs in scene list
