@@ -49,8 +49,12 @@ public class UnitManager : MonoBehaviour
         }
   
     }
-   
 
+
+
+    //----------------------//
+    //      Connections     //
+    //----------------------//
 
     // Public Function so Queue and PrefabsInScene List can be kept private
     public void AddToQueue(Unit newUnit) //Queue needed because everyone trying to use AddConnection() at once was causing issues.
@@ -93,13 +97,6 @@ public class UnitManager : MonoBehaviour
         //Debug.Log("location = " + newUnit.location + "prefabs in list = " + prefabsInScene.Count);
     }
 
-    /*public int GetHCost(Unit A, Unit B)
-    {
-        int hValue = (Math.Abs(A.location.x - B.location.x) + Math.Abs(A.location.y - B.location.y)) * 10;
-
-        return hValue;
-    }*/
-
 
     public void RemoveConnection(Unit deadUnit)
     {
@@ -122,13 +119,16 @@ public class UnitManager : MonoBehaviour
 
 
 
+    //---------------//
+    //      Eat      //
+    //---------------//
+
     public void Eat(Unit preditor, Unit prey)
     {
         // on collision
 
         preditor.hunger += prey.nValue;
         if (preditor.hunger > 100) { preditor.hunger = 100; } // since 100 is meant to be the max
-        // npc.maxhunger
 
         prey.health -= 1;
         // if prey's health is 0, then unit class will initiate self destruction 

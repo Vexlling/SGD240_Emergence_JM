@@ -8,20 +8,16 @@ public class EatDesired : Action
     
     public override void Execute(NpcController npc)
     {
+        //
 
-        Debug.Log("Going to desird");
+        Debug.Log("I'm going to desired");
 
         // execute action here
         npc.DoEatDesired(1);
-        //npc.maxHunger -= 1;
-        Debug.Log("Just Ate 1 desired");
+        
+        
 
-        // logic for updating everything involved with eating desired
-
-        // set target cords to that of the proxDesired unit
-
-        // on collision with target deal 1 damage point, take nutritional value and add to hunger
-        // * target being dealt damage either dies off or takes a hit to health
+      
 
         npc.OnFinishedAction();
     }

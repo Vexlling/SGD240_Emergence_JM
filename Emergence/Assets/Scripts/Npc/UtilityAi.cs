@@ -41,6 +41,11 @@ public class UtilityAi : MonoBehaviour
         }
     }
 
+
+    //----------------------//
+    //      Personality     //
+    //----------------------//
+
     private void TraitSetUp()
     {
         // Converting to percentages for Utility scoring
@@ -68,8 +73,15 @@ public class UtilityAi : MonoBehaviour
         return output;
     }
 
+
+    //-------------------//
+    //      Scoring      //
+    //-------------------//
+
     public void DecideBestAction(Action[] actionsAvailable) // needs to be public
     {
+        //npc.UpdateHunger();
+
         float score = 0f;
         int nextBestActionIndex = 0;
         for (int i = 0; i < actionsAvailable.Length; i++)
@@ -114,21 +126,5 @@ public class UtilityAi : MonoBehaviour
         action.score = originalScore + (makeupValue * originalScore);
 
         return action.score;
-
-
-
-        // input, input normalisation, reponsecurve
-
-        // WANDER
-        // input: hunger level
-        // response curve: increase, slow at first, fast later
-
-        // EAT CLOSEST
-        // input: hunger level & proximity to closest
-        // response curve: increase, slow at first, fast later
-
-        // EAT DESIRED
-        // input: hunger level & proximity to desired
-        // response curve: increase, slow at either end, fast in the middle
     }
 }

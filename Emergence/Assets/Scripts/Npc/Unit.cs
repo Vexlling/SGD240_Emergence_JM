@@ -21,11 +21,12 @@ public class Unit : MonoBehaviour
 
     public int health; // spore = 1, other = 2, so eating bigger take a little longer, which could give them enough hunger to nibble then run away.
     [HideInInspector] public int hunger = 100; // spore will have this too, just ignore it for now
+    // true hunger value, tweakable by other scripts
 
     // for distance calc
     public Vector2Int location; // hide later
     [HideInInspector] public int hierarchicalCost;
-    public List<Unit> connections; // for proximity // hide later 
+    public List<Unit> connections; // for proximity 
 
     
     

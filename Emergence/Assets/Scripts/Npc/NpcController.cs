@@ -14,7 +14,7 @@ public class NpcController : MonoBehaviour
  
     // for actions
     public Action[] actionsAvailable;
-    [SerializeField] public int maxHunger = 100;
+    public int maxHunger { get; private set; } // read only for consideration scores
 
     //public bool alreadyExecutingIdle = false;
     //public bool alreadyExecutingDesired = false; // not sure where to assign, used for changing decisions on the fly.
@@ -49,8 +49,6 @@ public class NpcController : MonoBehaviour
 
     [SerializeField] private PrefabType Desired;
     public PrefabType desired { get; private set; }
-
-    
 
 
 
@@ -90,6 +88,10 @@ public class NpcController : MonoBehaviour
         desired = Desired;
 
         speed = movementSpeed;
+
+        //UpdateHunger();
+
+        StartCoroutine(UpdateHunger(2)); // decreasing the hunger value here so spore's hunger won't be affected.
     }
 
 
@@ -119,6 +121,13 @@ public class NpcController : MonoBehaviour
         }*/
     }
 
+    IEnumerator UpdateHunger(int seconds)
+    {
+        thisUnit.hunger -= 1;
+        maxHunger = thisUnit.hunger;
+
+        yield return new WaitForSeconds(seconds);
+    }
 
 
     //------------------//
@@ -137,14 +146,14 @@ public class NpcController : MonoBehaviour
     // EAT ACTIONS
     public void DoEatDesired(int time)
     {
-        CalculateProximity();
+        //CalculateProximity();
         //LocateTarget(desiredProx.location);
         StartCoroutine(EatChosen(time, desiredProx));
     }
 
     public void DoEatClosest(int time)
     {
-        CalculateProximity();
+        //CalculateProximity();
         //LocateTarget(closestProx.location);
         StartCoroutine(EatChosen(time, closestProx));
     }
@@ -221,6 +230,12 @@ public class NpcController : MonoBehaviour
 
     #endregion
 
+
+
+    //---------------------//
+    //      Pathfinder     //
+    //---------------------//
+
     public void LocateTarget(Vector2Int location)
     {
         Vector2Int targetCords = location;
@@ -253,7 +268,7 @@ public class NpcController : MonoBehaviour
         //CalculateProximity();
     }
 
-    // this should be worked into the actions coroutines
+
     IEnumerator FollowPath()
     {
         //Debug.Log("follow path called");
