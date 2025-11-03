@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class ConIdle : Consideration
 {
-    [SerializeField] private AnimationCurve responseCurve;
+    //[SerializeField] private AnimationCurve responseCurve;
     public override float ScoreConsideration(NpcController npc)
     {
-        score = responseCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // constant or fall back option
+        score = 0.1f; // constant or fall back option
+
+        //if (npc.alreadyExecutingIdle && score <= 0.9f) { score += 0.1f; }
 
         return score;
     }

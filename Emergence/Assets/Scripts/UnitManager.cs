@@ -89,7 +89,7 @@ public class UnitManager : MonoBehaviour
         newUnitQueue.Dequeue();
         Debug.Log("DeQueued");
 
-        Debug.Log("Co count: " + newUnit.connections.Count);
+        //Debug.Log("Co count: " + newUnit.connections.Count);
         //Debug.Log("location = " + newUnit.location + "prefabs in list = " + prefabsInScene.Count);
     }
 
@@ -132,5 +132,7 @@ public class UnitManager : MonoBehaviour
 
         prey.health -= 1;
         // if prey's health is 0, then unit class will initiate self destruction 
+
+        Debug.Log(preditor.type + " has taken a nibble of " + prey.type);
     }
 }

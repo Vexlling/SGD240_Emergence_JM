@@ -90,7 +90,7 @@ public class UtilityAi : MonoBehaviour
 
     public float ScoreAction(Action action) // needs to be public 
     {
-        npc.CalculateProximity(); // might be the wrong place to assign this
+        //npc.CalculateProximity(); // might be the wrong place to assign this
 
         float score = 1f;
         for (int i = 0; i < action.considerations.Length; i++)

@@ -4512,23 +4512,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6338913689427993542, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: temp.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6338913689427993542, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: temp.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -6338913689427993542, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: movementSpeed
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3903025151541257744, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -3903025151541257744, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
-      propertyPath: maxHunger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2299913371975017675, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: targetCords.x
@@ -4556,7 +4548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3985384527035632909, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3985384527035632909, guid: 52c34d1092029c140b7b8672d67905df, type: 3}
       propertyPath: m_LocalPosition.y

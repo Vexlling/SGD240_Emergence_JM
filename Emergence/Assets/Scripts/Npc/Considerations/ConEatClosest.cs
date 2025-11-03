@@ -13,9 +13,9 @@ public class ConEatClosest : Consideration
     {
         // take closest approx unit.hscore and translate to percentage
 
-        // if this action is already chosen then + 0.1
-
         score = hungerVsClosestCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // replace 100f with cloest aprrox percentage
+
+        //if (npc.alreadyExecutingClosest && score <= 0.9f) { score += 0.1f; }
 
         return score;
     }

@@ -7,9 +7,10 @@ public class Idle : Action
 {
     public override void Execute(NpcController npc)
     {
-        // execute action here
-        npc.DoIdle(1);
-
         // default fall back option
+
+        Debug.Log("I'm idle");
+
+        npc.DoIdle(5);     
     }
 }

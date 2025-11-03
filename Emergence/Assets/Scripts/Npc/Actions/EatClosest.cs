@@ -7,12 +7,16 @@ public class EatClosest : Action
 {
     public override void Execute(NpcController npc)
     {
+
+        Debug.Log("Going to closest");
+
         // execute action here
         npc.DoEatClosest(1);
-        npc.maxHunger -= 10;
+        //npc.maxHunger -= 10;
         Debug.Log("Just Ate 1 closest");
         // logic for updating everything involved with eating desired
 
+        //npc.thisUnit.hunger = 0;
 
         // set target cords to that of the proxDesired unit
 

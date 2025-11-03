@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour
         // fluid
         this.location = location;
         this.hierarchicalCost = hCost;
-        this.connections = connections;
+        this.connections = connections; // just realised spores don't need a connections list
         this.health = health;
         this.hunger = hunger;
     }

@@ -11,9 +11,9 @@ public class ConEatDesired : Consideration
     {
         // take desired approx unit.hscore and translate to percentage
 
-        // if this action is already chosen then + 0.1
-
         score = hungerVsDesiredCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // replace 100f with desired aprrox percentage
+
+        //if (npc.alreadyExecutingDesired && score <= 0.9f) { score += 0.1f; }
 
         return score;
     }

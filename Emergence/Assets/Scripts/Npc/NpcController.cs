@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Linq;
+using static UnityEditor.FilePathAttribute;
 
 public class NpcController : MonoBehaviour
 {
@@ -14,27 +15,30 @@ public class NpcController : MonoBehaviour
     // for actions
     public Action[] actionsAvailable;
     [SerializeField] public int maxHunger = 100;
-    public int tempClosest = 10;
-    public int tempDesired = 10;
+
+    //public bool alreadyExecutingIdle = false;
+    //public bool alreadyExecutingDesired = false; // not sure where to assign, used for changing decisions on the fly.
+    //public bool alreadyExecutingClosest = false;
 
     Unit closestProx;
     Unit desiredProx;
     Unit bestUnit;
     Unit current;
 
-    // displays actions of a specific prefab
-    public string chosenAction;
+        // displays actions of a specific prefab
+        public string chosenAction;
 
 
 
     // for movement
-    [SerializeField] private float movementSpeed = 2.0f;
-    List<GridNode> path = new List<GridNode>();
+    [SerializeField] private float movementSpeed = 2.0f; // inspector set constant
+    private float speed; // fluid
+    List<GridNode> path = new List<GridNode>(); 
     
     bool movedOnce = false;
 
         // set target cords to check pathfinder is working
-        public Vector2Int temp;
+        //public Vector2Int temp;
 
 
 
@@ -84,6 +88,8 @@ public class NpcController : MonoBehaviour
         // assaigning static values
         willEat = WillEat;
         desired = Desired;
+
+        speed = movementSpeed;
     }
 
 
@@ -101,7 +107,7 @@ public class NpcController : MonoBehaviour
         // set current gridnode sat on isEmpty = false;
 
         //CurrentLocation();
-
+        /*
         if (spawner.groupSpawned && !movedOnce)
         {
             LocateTarget(temp);
@@ -110,7 +116,7 @@ public class NpcController : MonoBehaviour
 
             //Debug.LogWarning("StartCords = " + startCords);
             //Debug.LogWarning("targetCords = " + targetCords);
-        }
+        }*/
     }
 
 
@@ -127,23 +133,35 @@ public class NpcController : MonoBehaviour
 
     #region Coroutine
 
+
+    // EAT ACTIONS
     public void DoEatDesired(int time)
     {
-        StartCoroutine(EatDesiredCoroutine(time));
+        CalculateProximity();
+        //LocateTarget(desiredProx.location);
+        StartCoroutine(EatChosen(time, desiredProx));
     }
 
     public void DoEatClosest(int time)
     {
-        StartCoroutine(EatClosestCoroutine(time));
+        CalculateProximity();
+        //LocateTarget(closestProx.location);
+        StartCoroutine(EatChosen(time, closestProx));
     }
 
-    public void DoIdle(int time)
+    IEnumerator EatChosen(int time, Unit chosen)
     {
-        StartCoroutine(IdleCoroutine(time));
-    }
+        // set target cords to pathfinder
+        // update chosen location
+        // if at target? if not reset target cords
 
-    IEnumerator EatDesiredCoroutine(int time)
-    {
+        //unitManager.Eat(thisUnit, chosen);
+
+        // on collision (call eat from unit mamager) (on collison end follow croutine)
+        // when eat wait 2-3 seconds 
+        // make a new decision
+
+
         int counter = time;
         while (counter > 0)
         {
@@ -157,19 +175,33 @@ public class NpcController : MonoBehaviour
         OnFinishedAction();
     }
 
-    IEnumerator EatClosestCoroutine(int time)
+
+    // IDLE ACTION
+    public void DoIdle(int time)
     {
-        int counter = time;
-        while (counter > 0)
+        // slowly move to nearby tile
+
+
+        // get list of immediate tiles and choose one at random
+        Vector2Int[] immediateDirection = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+        int randomSum = UnityEngine.Random.Range(0, immediateDirection.Length);
+        Vector2Int randomDirection = immediateDirection[randomSum];
+
+        speed = movementSpeed / 2; // temp half speed for idle movement
+
+        
+        // set target cords
+        GridNode node = gridManager.GetNode(thisUnit.location + randomDirection); // variable local to function only, used for checks
+
+        if (node != null && node.walkable) // catch out of grid bounds or non walkable destination
         {
-            yield return new WaitForSeconds(1);
-            counter--;
+            LocateTarget(thisUnit.location + randomDirection);
         }
+        else { Debug.Log("Target access is blocked"); } 
+    
 
-        Debug.Log("Just Ate 1 closest");
-        // logic to update hunger
-
-        OnFinishedAction();
+        // wait for seconds
+        StartCoroutine(IdleCoroutine(time));
     }
 
     IEnumerator IdleCoroutine(int time)
@@ -181,10 +213,7 @@ public class NpcController : MonoBehaviour
             counter--;
         }
 
-        Debug.Log("I'm idle");
-        // logic to update hunger
-
-        // decide our new best action after you finished this one
+        speed = movementSpeed; // reset movement speed to original
 
         OnFinishedAction();
     }
@@ -194,7 +223,6 @@ public class NpcController : MonoBehaviour
 
     public void LocateTarget(Vector2Int location)
     {
-        // Vector2Int targetCords = /*trackers.closestProx.location*/ positions[0].cords; // first spawned spore in scene regardless of proximity
         Vector2Int targetCords = location;
 
         Vector2Int startCords = new Vector2Int((int)prefab.transform.position.x, (int)prefab.transform.position.y) / gridManager.UnityGridSize;
@@ -202,8 +230,6 @@ public class NpcController : MonoBehaviour
 
         pathfinder.SetNewDestination(startCords, targetCords);
         RecalculatePath(true);
-
-        //trackers.CalculatePrxoimity();
     }
 
     void RecalculatePath(bool resetPath)
@@ -219,7 +245,8 @@ public class NpcController : MonoBehaviour
             coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
         }
 
-        StopAllCoroutines();
+        //StopAllCoroutines();
+        StopCoroutine(FollowPath());
         path.Clear();
         path = pathfinder.GetNewPath(coordinates);
         StartCoroutine(FollowPath());
@@ -240,7 +267,7 @@ public class NpcController : MonoBehaviour
 
             while (travelPercent < 1f)
             {
-                travelPercent += Time.deltaTime * movementSpeed;
+                travelPercent += Time.deltaTime * speed;
                 prefab.position = Vector2.Lerp(startPosition, endPosition, travelPercent); // shouldn't affect z-axis but it does
 
                 thisUnit.CurrentLocation(); // updates as unit moves
@@ -272,17 +299,16 @@ public class NpcController : MonoBehaviour
         thisUnit.connections.OrderBy(n => n.hierarchicalCost).ToList(); // ascending?
         // will they reassign the hcost for all unit connections list or just for this one?
         
+
+
+        // DESIRED PROXIMITY
+
         desiredProx = thisUnit.connections.Find(n => n.type == desired); // this works
-        Debug.Log("desired type: " + desiredProx + ", hCost: " + desiredProx.hierarchicalCost);
+        //Debug.Log("desired type: " + desiredProx + ", hCost: " + desiredProx.hierarchicalCost);
 
 
-        //closestProx = thisUnit.connections.Any(n => n.type == willEat.Contains(type));
-        //closestProx = thisUnit.connections.Find(n => n.type == willEat[].Any);
-        //closestProx = willEat.Any(type => thisUnit.connections.Contains(unit.type));
-        //closestProx = thisUnit.connections.Any(unit.type => willEat.Contains(type));
 
-        // I know brute forcing isn't the best method, but google and unity forums weren't being too useful
-
+        // CLOSEST PROXIMITY
 
         bestUnit = null; 
 
@@ -297,6 +323,6 @@ public class NpcController : MonoBehaviour
         }
 
         closestProx = bestUnit;
-        Debug.Log("closest type: " + closestProx + ", hCost: " + closestProx.hierarchicalCost);
+        //Debug.Log("closest type: " + closestProx + ", hCost: " + closestProx.hierarchicalCost);
     }
 }

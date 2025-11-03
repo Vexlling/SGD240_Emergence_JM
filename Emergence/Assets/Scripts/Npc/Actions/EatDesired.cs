@@ -8,9 +8,12 @@ public class EatDesired : Action
     
     public override void Execute(NpcController npc)
     {
+
+        Debug.Log("Going to desird");
+
         // execute action here
         npc.DoEatDesired(1);
-        npc.maxHunger -= 1;
+        //npc.maxHunger -= 1;
         Debug.Log("Just Ate 1 desired");
 
         // logic for updating everything involved with eating desired

@@ -18,7 +18,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.9
       inSlope: -0
       outSlope: -0
       tangentMode: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
       outWeight: 0.21977869
     - serializedVersion: 3
       time: 0.3
-      value: 0
+      value: 0.9
       inSlope: -0.03624851
       outSlope: -0.03624851
       tangentMode: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
       outWeight: 0.061014753
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
