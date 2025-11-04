@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ConIdle : Consideration
 {
-    //[SerializeField] private AnimationCurve responseCurve;
     public override float ScoreConsideration(NpcController npc)
     {
         score = 0.1f; // constant or fall back option

@@ -19,22 +19,16 @@ public enum PrefabType
 public class UnitManager : MonoBehaviour
 {
 
-    // GameObject list of Spores, A & B
+    // Collections of Spores, A & B
     private List<Unit> prefabsInScene = new List<Unit>();
 
     private Queue<Unit> newUnitQueue = new Queue<Unit>();
 
  
-
+    // refs
     NpcController npc;
     Unit unit;
     Spawner spawner;
-
-    //List<GridNode> positions = new List<GridNode>();
-
-    // if a spore is eaten remove from 
-    // RemoveEaten(GridNode node);
-
 
     void Start()
     {
@@ -103,7 +97,7 @@ public class UnitManager : MonoBehaviour
 
     public void RemoveConnection(Unit deadUnit)
     {
-        // when called remove unit from prefabs list
+        // when called remove unit from prefabs list if UnitDeath function has begun
 
         foreach (Unit entry in prefabsInScene)
         {

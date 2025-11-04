@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class ConEatDesired : Consideration
 {
+    // response curve tweakable from the equivalent ScriptableObject
     [SerializeField] private AnimationCurve hungerVsDesiredCurve;
+
     public override float ScoreConsideration(NpcController npc)
     {
-        // take desired approx unit.hscore and translate to percentage
+        // wanted to take desired approx unit.hscore and translate to percentage
 
-        //score = hungerVsDesiredCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // replace 100f with desired aprrox percentage
+        score = hungerVsDesiredCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // wanted to replace 100f with desired aprrox percentage
 
         //if (npc.alreadyExecutingDesired && score <= 0.9f) { score += 0.1f; }
-        
-        score = 0.9f; // for testing purposes
 
+
+        // catch if null
         if (npc.desiredProx == null)
         {
             Debug.Log("No desired to eat");

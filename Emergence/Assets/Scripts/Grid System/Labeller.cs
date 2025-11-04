@@ -15,6 +15,7 @@ public class Labeller : MonoBehaviour
     GridManager gridManager;
 
 
+    // colours for visualising the pathfinding algorithim
     [SerializeField] Color defaultColour = Color.white;
     [SerializeField] Color blockedColour = Color.red;
     [SerializeField] Color exploredColour = Color.yellow;
@@ -46,7 +47,7 @@ public class Labeller : MonoBehaviour
         tile.SetTileSprite();
     }
 
-    void SetLabelColour()
+    void SetLabelColour() // if this then that 
     {
         if (gridManager == null) { return; }
 
@@ -72,7 +73,7 @@ public class Labeller : MonoBehaviour
         }
     }
 
-    private void DisplayCords()
+    private void DisplayCords() // displays the cords on the tiles in the game scene, updates in realtime when moved
     {
         if (!gridManager) { return; }
         cords.x = Mathf.RoundToInt(transform.position.x / gridManager.UnityGridSize);
@@ -81,14 +82,13 @@ public class Labeller : MonoBehaviour
         label.text = $"{cords.x}, {cords.y}";
     }
 
-    void ToggleLabels()
+    void ToggleLabels() // won't really work with multiple pathfinding calculations
     {
         if (Input.GetKeyUp(KeyCode.C))
         {
             label.enabled = !label.IsActive();
         }
     }
-
 }
        
 

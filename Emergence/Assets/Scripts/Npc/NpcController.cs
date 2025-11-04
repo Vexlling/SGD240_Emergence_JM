@@ -17,19 +17,23 @@ public class NpcController : MonoBehaviour
     public Action[] actionsAvailable;
     public int maxHunger { get; private set; } // read only for consideration scores
 
+
+    // not sure where to assign, used for changing decisions on the fly.
+    // gives weight to previously chosen action if scoring on the fly, should avoid unit getting stuck between two targets
+
     //public bool alreadyExecutingIdle = false;
-    //public bool alreadyExecutingDesired = false; // not sure where to assign, used for changing decisions on the fly.
+    //public bool alreadyExecutingDesired = false; 
     //public bool alreadyExecutingClosest = false;
 
-    public Unit closestProx { get; private set; }
+    public Unit closestProx { get; private set; } // private set so they can be taken into consideation, but not editable 
     public Unit desiredProx { get; private set; }
     Unit bestUnit;
     Unit current;
 
 
+    // UI - displays actions of a specific prefab
+    public string chosenAction;
 
-        // displays actions of a specific prefab
-        public string chosenAction;
 
 
     // for collision
@@ -45,14 +49,11 @@ public class NpcController : MonoBehaviour
     private float speed; // fluid
     List<GridNode> path = new List<GridNode>(); 
 
-        // set target cords to check pathfinder is working
-        //public Vector2Int temp;
-
 
 
 
     // Inspector tweakable, read only for other scripts
-    [SerializeField] private PrefabType[] WillEat;
+    [SerializeField] private PrefabType[] WillEat; // list of everything they willing to eat
     public PrefabType[] willEat { get; private set; }
 
     [SerializeField] private PrefabType Desired;
@@ -65,7 +66,7 @@ public class NpcController : MonoBehaviour
     [SerializeField] private GameObject Spore;
     [SerializeField] private GameObject A;
     [SerializeField] private GameObject B;
-
+    // manually link gameobjects because you can't get unit class from gameobjects
 
 
     // refs
@@ -78,8 +79,8 @@ public class NpcController : MonoBehaviour
     GridManager gridManager;
 
     Transform prefab;
-
     Spawner spawner;
+    Rigidbody2D rb;
 
 
 
@@ -94,9 +95,8 @@ public class NpcController : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
 
         prefab = GetComponent<Transform>();
-
         spawner = GetComponentInParent<Spawner>();
-        
+        rb = GetComponent<Rigidbody2D>();
 
 
         // assaigning static values
@@ -105,7 +105,6 @@ public class NpcController : MonoBehaviour
 
         speed = movementSpeed;
 
-        //UpdateHunger();
 
         StartCoroutine(UpdateHunger(1)); // decreasing the hunger value here so spore's hunger won't be affected.
     }
@@ -121,18 +120,11 @@ public class NpcController : MonoBehaviour
         }
 
         // set current gridnode sat on isEmpty = false;
-
-        //CurrentLocation();
-
-        /*
-        if (spawner.groupSpawned && thisUnit.connections.Count != 0)
-        {
-            CalculateProximity(desiredProx);
-        }*/
     }
 
     IEnumerator UpdateHunger(int seconds)
     {
+        // hunger decreases over time, but you have more control then just using DeltaTime
         thisUnit.hunger -= 1;
         maxHunger = thisUnit.hunger;
 
@@ -140,8 +132,9 @@ public class NpcController : MonoBehaviour
     }
 
 
+
     //------------------//
-    //      Actions     // remove?
+    //      Actions     // 
     //------------------//
 
     public void OnFinishedAction()
@@ -151,9 +144,12 @@ public class NpcController : MonoBehaviour
         utilityAi.DecideBestAction(actionsAvailable);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision) // not registering no matter what I do
     {
-        Debug.Log("collision called");
+        // this doesn't even come up so I know it's not the logic inside
+        // in theory the below code should work
+        Debug.Log("collision called"); 
+
         if (collision.gameObject == (A || B || Spore) && this.lookingForCollision)
         {
             Debug.Log("unit collision detected");
@@ -184,19 +180,19 @@ public class NpcController : MonoBehaviour
     public void DoEatDesired(int time)
     {
         CalculateProximity();
-        //Debug.Log("desired type: " + desiredProx + ", hCost: " + desiredProx.hierarchicalCost);
-        //LocateTarget(desiredProx.location);
-        StartCoroutine(EatChosen(time, desiredProx));
-        //unitManager.Eat(thisUnit, desiredProx);
 
+        // not sure if it's better to set the destination from here
+        //LocateTarget(desiredProx.location);
+
+        StartCoroutine(EatChosen(time, desiredProx));
+
+        // again not sure if it's better to make a new decision from here
         //OnFinishedAction();
     }
 
-    public void DoEatClosest(int time)
+    public void DoEatClosest(int time) // more or less a copy of DoEatDesired()
     {
         CalculateProximity();
-        //Debug.Log("closest type: " + closestProx + ", hCost: " + closestProx.hierarchicalCost);
-        //LocateTarget(closestProx.location);
         StartCoroutine(EatChosen(time, closestProx));
 
         //OnFinishedAction();
@@ -206,46 +202,33 @@ public class NpcController : MonoBehaviour
     {
         lookingForCollision = true;
 
-        //when eat wait 2 - 3 seconds
-        int counter = time;
-        while (counter > 0)
-        {
-            yield return new WaitForSeconds(1);
-            counter--;
-        }
-
         //Debug.Log("chosen type: " + chosen + ", hCost: " + chosen.hierarchicalCost);
 
         // set target cords to pathfinder
         LocateTarget(chosen.location);
         
-        // if at target? if not reset target cords
-        if (thisUnit.location != chosen.location) // cheap way, instead of using collision events
+        // if at target? if not try again
+        if (thisUnit.location != chosen.location) // cheap way, might be better within a while loop
         {
             LocateTarget(chosen.location);
         }
 
-        //unitManager.Eat(thisUnit, chosen);
 
-        // on collision (call eat from unit mamager) (on collison end follow croutine)
-
-        // make a new decision
-
-
+        // in theory once collision is detected then eat - digest - make new decision should function correctly
         if (hasCollided) 
         {
-            //unitManager.Eat(thisUnit, collidedUnit);
+            unitManager.Eat(thisUnit, collidedUnit);
 
-            //int counter = time;
-            //while (counter > 0)
-            //{
-            //    yield return new WaitForSeconds(1);
-            //    counter--;
-            //}
+            // time it takes to 'digest' eaten food
+            int counter = time;
+            while (counter > 0)
+            {
+                yield return new WaitForSeconds(1);
+                counter--;
+            }
 
             OnFinishedAction();
         }
-        
     }
 
 
@@ -331,7 +314,6 @@ public class NpcController : MonoBehaviour
         path.Clear();
         path = pathfinder.GetNewPath(coordinates);
         StartCoroutine(FollowPath());
-        //CalculateProximity();
     }
 
 
@@ -352,7 +334,6 @@ public class NpcController : MonoBehaviour
                 prefab.position = Vector2.Lerp(startPosition, endPosition, travelPercent); // shouldn't affect z-axis but it does
 
                 thisUnit.CurrentLocation(); // updates as unit moves
-                //CalculateProximity(); // updates as unit moves
                 
                 yield return new WaitForEndOfFrame();
             }
@@ -366,28 +347,31 @@ public class NpcController : MonoBehaviour
 
     public void CalculateProximity()
     {
-        //desiredProx = null; // since it's already recalculating everytime the function is called, no harm in setting to null
-        //closestProx = null;
-
+  
+        // if the group hasn't spawned then generallly this function doesn't have anything to calculate with
         if (!spawner.groupSpawned) { Debug.Log("GroupSpawn needed for connections"); return; }
-        //Debug.Log("Proximity Calc called");
+        
         //Debug.Log("Co count: " + thisUnit.connections.Count);
         if (thisUnit.connections.Count == 0) { Debug.Log("connections empty");  return; } // abort early if empty
 
+
+        // calculate hCost
         foreach (Unit entry in thisUnit.connections)
         {
             entry.hierarchicalCost = (Math.Abs(thisUnit.location.x - entry.location.x) + Math.Abs(thisUnit.location.y - entry.location.y)) * 10;
         }
 
-        // order list
-        thisUnit.connections.OrderBy(n => n.hierarchicalCost).ToList(); // ascending?
+
+        // ORDER LIST
+
+        thisUnit.connections.OrderBy(n => n.hierarchicalCost).ToList(); // ascends
         // will they reassign the hcost for all unit connections list or just for this one?
         
 
 
         // DESIRED PROXIMITY
 
-        desiredProx = thisUnit.connections.Find(n => n.type == desired); // this works
+        desiredProx = thisUnit.connections.Find(n => n.type == desired); 
         //Debug.Log("desired type: " + desiredProx + ", hCost: " + desiredProx.hierarchicalCost);
 
 
@@ -397,7 +381,7 @@ public class NpcController : MonoBehaviour
         bestUnit = null; 
 
         // seems inefficient but couldn't get other methods to work
-        foreach (PrefabType entry in WillEat) // this works too!
+        foreach (PrefabType entry in WillEat) 
         {
             current = thisUnit.connections.Find(n => n.type == entry);
             if (bestUnit == null || current.hierarchicalCost < bestUnit.hierarchicalCost) // smaller the better

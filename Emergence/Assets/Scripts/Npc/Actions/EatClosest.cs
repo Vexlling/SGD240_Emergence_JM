@@ -7,15 +7,12 @@ public class EatClosest : Action
 {
     public override void Execute(NpcController npc)
     {
-        //
+
+        // Main logic in Npc controller
 
         Debug.Log("I'm going to closest");
 
-        // execute action here
+
         npc.DoEatClosest(3);
-  
-
-
-        //npc.OnFinishedAction(); // might be doubling  up
     }
 }

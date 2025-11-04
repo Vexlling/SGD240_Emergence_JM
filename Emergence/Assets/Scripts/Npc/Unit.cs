@@ -25,12 +25,12 @@ public class Unit : MonoBehaviour
     [HideInInspector] public int hunger = 100; // spore will have this too, just ignore it for now
     // true hunger value, tweakable by other scripts
 
+
     // for distance calc
     public Vector2Int location; // hide later
     [HideInInspector] public int hierarchicalCost;
     public List<Unit> connections; // for proximity 
 
-    
     
 
     public Unit(PrefabType type, int pips, GameObject body, Vector2Int location, int hCost, List<Unit> connections, int health, int hunger)
@@ -50,7 +50,6 @@ public class Unit : MonoBehaviour
 
     GridManager gridManager;
     UnitManager unitManager;
-   // GameObject prefab;
 
     private void Start()
     {
@@ -63,8 +62,6 @@ public class Unit : MonoBehaviour
         unitManager = GetComponentInParent<UnitManager>();
         body = GetComponent<GameObject>();
 
-
-        //CurrentLocation(); // moved to AddConnections function in UnitManager
 
         unitManager.AddToQueue(this);
     }
@@ -86,10 +83,7 @@ public class Unit : MonoBehaviour
     {
         unitManager.RemoveConnection(this);
 
-        // RemoveEaten() in UnitManager handles spore positions for Spawner
-
         Debug.Log("unit " + this.type + " has died");
         Destroy(body); // only this class will be able to destroy the prefab, other scripts can only set unit health to 0
     }
-
 }

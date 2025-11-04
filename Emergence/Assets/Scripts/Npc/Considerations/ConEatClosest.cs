@@ -7,23 +7,25 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class ConEatClosest : Consideration
 {
+    // response curve tweakable from the equivalent ScriptableObject
     [SerializeField] private AnimationCurve hungerVsClosestCurve;
 
     public override float ScoreConsideration(NpcController npc)
     {
-        // take closest approx unit.hscore and translate to percentage
+        // wanted to take closest approx unit.hscore and translate to percentage
 
-        //score = hungerVsClosestCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // replace 100f with cloest aprrox percentage
+        score = hungerVsClosestCurve.Evaluate(Mathf.Clamp01(npc.maxHunger / 100f)); // wanted to replace 100f with cloest aprrox percentage
 
         //if (npc.alreadyExecutingClosest && score <= 0.9f) { score += 0.1f; }
 
-        score = 0.2f; // for testing purposes
 
+        // catch if null
         if (npc.closestProx == null)
         {
             Debug.Log("No closest to eat");
             score = 0f;
         }
+
 
         return score;
     }

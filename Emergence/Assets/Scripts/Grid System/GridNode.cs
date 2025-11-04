@@ -14,9 +14,10 @@ public class GridNode
     public bool IsEmpty = true; // for moving targets
     public GridNode connectTo;
 
+    // for A* 
     public int gCost;           // distance from start node to current node
-    public int hCost;                           // estimated distance from current node to target node
-    public int fCost;                          // sum of g & h 
+    public int hCost;           // estimated distance from current node to target node
+    public int fCost;           // sum of g & h 
     public float FCost()
     {
         return gCost + hCost;

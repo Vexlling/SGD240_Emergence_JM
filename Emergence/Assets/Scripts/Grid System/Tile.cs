@@ -16,7 +16,7 @@ public class Tile : MonoBehaviour
 
     GridManager gridManager;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         SetCords();
@@ -27,7 +27,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void SetCords()
+    private void SetCords() // fpr displaying cords
     { 
         gridManager = FindObjectOfType<GridManager>();
         int x = (int)transform.position.x;
@@ -37,7 +37,7 @@ public class Tile : MonoBehaviour
     }
     
     
-    public void SetTileSprite()
+    public void SetTileSprite() // visually shows the blocked status of blocks in scene
     {
         // called from Labeller script
         if (blocked)

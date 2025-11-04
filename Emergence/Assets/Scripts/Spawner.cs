@@ -2,46 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-//using static UnityEngine.RuleTile.TilingRuleOutput;
 using System.Linq;
 using UnityEditor;
-using UnityEngine.SceneManagement;
-//using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
 
-    // might have to be redone
+    // Script only really intended for Spores
 
+    // Adjustable variables
     [SerializeField] private GameObject[] prefab;
     [SerializeField] private int maxPopulation;
     [SerializeField] private int initialSpawnSize;
     [SerializeField] private float spawnInterval = 1.0f;
 
 
+    // Grid System refs
     GridNode node;
-
     GridManager gridManager;
     private Dictionary<Vector2Int, GridNode> grid;
 
-    private List<GridNode> available = new List<GridNode>();
-    private List<GameObject> prefabTotal = new List<GameObject>();
+
+    // for instantiating spores
+    private List<GridNode> available = new List<GridNode>(); // non blocked tiles
+    private List<GameObject> prefabTotal = new List<GameObject>(); 
     private bool isSpawning = false;
-    //private bool groupSpawned = false;
 
     public bool groupSpawned { get; private set; }
 
 
-    private List<GridNode> positions = new List<GridNode>();
-    //public List<GridNode> Positions { get { return positions; } }
+    private List<GridNode> positions = new List<GridNode>(); // list of instantiated prefabs' locations
+    [SerializeField] private GameObject mother; // manual link for getting children to spawn under SceneManager
 
-
-    [SerializeField] private GameObject mother;
-    //UnitManager unitManager;
-
-
-    // if entry.location in prefabsinscene == gridnode.cords
-    // then gridnode.IsEmpty = false; 
 
     private void Awake()
     {
@@ -56,8 +48,6 @@ public class Spawner : MonoBehaviour
     {
         groupSpawned = false;
         InitialSpawn();
-
-        //unitManager = GetComponent<UnitManager>();
     }
 
     void Update()
@@ -78,7 +68,7 @@ public class Spawner : MonoBehaviour
 
         //available.RemoveAll(node => positions.Contains(node)); 
 
-
+        // get random position for instantiating
         int randomIndex = Random.Range(0, available.Count);
         GridNode spawnPosition = available[randomIndex];
 
@@ -87,7 +77,6 @@ public class Spawner : MonoBehaviour
             GameObject gameObject = Instantiate(prefab[0], new Vector3Int(spawnPosition.cords.x, spawnPosition.cords.y), Quaternion.identity, mother.transform);
 
             prefabTotal.Add(gameObject);
-            //unitManager.prefabsInScene.Add(gameObject);
             positions.Add(spawnPosition);
         }
         else SpawnPrefab(); // seems like a bad thing to do, like it could endlessly loop   
@@ -95,7 +84,7 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator ContinueSpawning()
     {
-
+  
         isSpawning = true;
 
         while (prefabTotal.Count < maxPopulation)
@@ -141,13 +130,15 @@ public class Spawner : MonoBehaviour
         return;
     }
 
-    public void RemoveEaten(Vector2Int location)
+    public void RemoveEaten(Vector2Int location) // more universal to use Vector2Int when calling from other scripts
     {
+        // Convert to GridNode
+        node = gridManager.GetNode(location);
+
         if (positions.Contains(node))
         {
             positions.Remove(node);
         } 
         else { Debug.Log("node to remove not in positions list"); }
-       
     }
 }
