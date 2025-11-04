@@ -33,7 +33,7 @@ public class Spawner : MonoBehaviour
 
 
     private List<GridNode> positions = new List<GridNode>();
-    public List<GridNode> Positions { get { return positions; } }
+    //public List<GridNode> Positions { get { return positions; } }
 
 
     [SerializeField] private GameObject mother;
@@ -141,15 +141,13 @@ public class Spawner : MonoBehaviour
         return;
     }
 
-    public void RemoveEaten(GridNode node)
+    public void RemoveEaten(Vector2Int location)
     {
         if (positions.Contains(node))
         {
             positions.Remove(node);
         } 
-        else
-        {
-            // Debug.Log("node not in Spawner positions list");
-        }
+        else { Debug.Log("node to remove not in positions list"); }
+       
     }
 }

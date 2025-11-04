@@ -9,33 +9,37 @@ using UnityEngine.Windows;
 public class UtilityAi : MonoBehaviour
 {
 
-    // personality traits
-    [SerializeField] private bool randomiseTraits = false;
+    // personality traits 
+    //// hidden from inspector because traits are unable to be taken into consideration scores atm
+    [HideInInspector] private bool randomiseTraits = false;
 
-    [Range(0, 10)] [SerializeField] private int intimidationScale;
-    [Range(0, 10)] [SerializeField] private int braveryScale;
+    [Range(0, 10)][HideInInspector] private int intimidationScale;
+    [Range(0, 10)][HideInInspector] private int braveryScale;
    
     private float intimidation;
     private float bravery;
 
 
     // for actions
-    public Action bestAction;
+    [HideInInspector] public Action bestAction; // shouldn't be tweakable from the inspector
     NpcController npc;
-    public bool finishedDeciding;
+    [HideInInspector] public bool finishedDeciding;
 
-
+    Spawner spawner;
+    Unit thisUnit;
 
     void Start()
     {
         TraitSetUp();
 
         npc = GetComponent<NpcController>();
+        spawner = GetComponent<Spawner>();
+        thisUnit = GetComponent<Unit>();
     }
 
     void Update()
     {
-        if (bestAction is null)
+        if (bestAction is null && thisUnit.connections.Count != 0) // to make sure there are spores in the scene // needed for proximity calc
         {
             DecideBestAction(npc.actionsAvailable);
         }
@@ -102,7 +106,7 @@ public class UtilityAi : MonoBehaviour
 
     public float ScoreAction(Action action) // needs to be public 
     {
-        //npc.CalculateProximity(); // might be the wrong place to assign this
+        npc.CalculateProximity(); // so considerations can take null into account
 
         float score = 1f;
         for (int i = 0; i < action.considerations.Length; i++)

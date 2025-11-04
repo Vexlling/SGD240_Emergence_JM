@@ -12,10 +12,10 @@ public class EatClosest : Action
         Debug.Log("I'm going to closest");
 
         // execute action here
-        npc.DoEatClosest(1);
+        npc.DoEatClosest(3);
   
 
 
-        npc.OnFinishedAction();
+        //npc.OnFinishedAction(); // might be doubling  up
     }
 }

@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.FilePathAttribute;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public enum PrefabType
@@ -108,9 +111,10 @@ public class UnitManager : MonoBehaviour
             {
                 entry.connections.Remove(deadUnit);
             }
-
             continue;
         }
+
+        if (deadUnit.type == PrefabType.Spore) { spawner.RemoveEaten(deadUnit.location); } // quick and dirty for spawner script function of spores only
 
         prefabsInScene.Remove(deadUnit);
 

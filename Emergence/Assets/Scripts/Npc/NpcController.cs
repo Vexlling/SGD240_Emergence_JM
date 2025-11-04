@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using System.Linq;
 using static UnityEditor.FilePathAttribute;
+using Unity.VisualScripting;
 
 public class NpcController : MonoBehaviour
 {
@@ -20,13 +21,22 @@ public class NpcController : MonoBehaviour
     //public bool alreadyExecutingDesired = false; // not sure where to assign, used for changing decisions on the fly.
     //public bool alreadyExecutingClosest = false;
 
-    Unit closestProx;
-    Unit desiredProx;
+    public Unit closestProx { get; private set; }
+    public Unit desiredProx { get; private set; }
     Unit bestUnit;
     Unit current;
 
+
+
         // displays actions of a specific prefab
         public string chosenAction;
+
+
+    // for collision
+    private bool lookingForCollision = false; // to allow the possibility to collide with unintentional units 
+    private bool hasCollided = false;
+
+    Unit collidedUnit; // to allow the possibility for A to nibble B be accident
 
 
 
@@ -34,8 +44,6 @@ public class NpcController : MonoBehaviour
     [SerializeField] private float movementSpeed = 2.0f; // inspector set constant
     private float speed; // fluid
     List<GridNode> path = new List<GridNode>(); 
-    
-    bool movedOnce = false;
 
         // set target cords to check pathfinder is working
         //public Vector2Int temp;
@@ -49,6 +57,14 @@ public class NpcController : MonoBehaviour
 
     [SerializeField] private PrefabType Desired;
     public PrefabType desired { get; private set; }
+
+
+
+    // temp
+    // for collision detection 
+    [SerializeField] private GameObject Spore;
+    [SerializeField] private GameObject A;
+    [SerializeField] private GameObject B;
 
 
 
@@ -91,7 +107,7 @@ public class NpcController : MonoBehaviour
 
         //UpdateHunger();
 
-        StartCoroutine(UpdateHunger(2)); // decreasing the hunger value here so spore's hunger won't be affected.
+        StartCoroutine(UpdateHunger(1)); // decreasing the hunger value here so spore's hunger won't be affected.
     }
 
 
@@ -104,20 +120,14 @@ public class NpcController : MonoBehaviour
             utilityAi.bestAction.Execute(this);
         }
 
-        // maxHunger -= 1 // decrease overtime
-
         // set current gridnode sat on isEmpty = false;
 
         //CurrentLocation();
+
         /*
-        if (spawner.groupSpawned && !movedOnce)
+        if (spawner.groupSpawned && thisUnit.connections.Count != 0)
         {
-            LocateTarget(temp);
-
-            movedOnce = true;
-
-            //Debug.LogWarning("StartCords = " + startCords);
-            //Debug.LogWarning("targetCords = " + targetCords);
+            CalculateProximity(desiredProx);
         }*/
     }
 
@@ -131,46 +141,72 @@ public class NpcController : MonoBehaviour
 
 
     //------------------//
-    //      Actions     //
+    //      Actions     // remove?
     //------------------//
 
     public void OnFinishedAction()
     {
+        lookingForCollision = false;
+        hasCollided = false;
         utilityAi.DecideBestAction(actionsAvailable);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("collision called");
+        if (collision.gameObject == (A || B || Spore) && this.lookingForCollision)
+        {
+            Debug.Log("unit collision detected");
 
+            foreach (Unit entry in thisUnit.connections) // for int loop with thisUnit.connections wasn't working with unit.body
+            {
+                if (entry.body == collision.gameObject)
+                {
+                    collidedUnit = entry;
+                    return;
+                }
+
+                continue;
+            }
+
+            hasCollided = true;
+        }
+    }
+
+
+  
     #region Coroutine
 
 
-    // EAT ACTIONS
+    //----------------------//
+    //      Eat Actions     //
+    //----------------------//
     public void DoEatDesired(int time)
     {
-        //CalculateProximity();
+        CalculateProximity();
+        //Debug.Log("desired type: " + desiredProx + ", hCost: " + desiredProx.hierarchicalCost);
         //LocateTarget(desiredProx.location);
         StartCoroutine(EatChosen(time, desiredProx));
+        //unitManager.Eat(thisUnit, desiredProx);
+
+        //OnFinishedAction();
     }
 
     public void DoEatClosest(int time)
     {
-        //CalculateProximity();
+        CalculateProximity();
+        //Debug.Log("closest type: " + closestProx + ", hCost: " + closestProx.hierarchicalCost);
         //LocateTarget(closestProx.location);
         StartCoroutine(EatChosen(time, closestProx));
+
+        //OnFinishedAction();
     }
 
     IEnumerator EatChosen(int time, Unit chosen)
     {
-        // set target cords to pathfinder
-        // update chosen location
-        // if at target? if not reset target cords
+        lookingForCollision = true;
 
-        //unitManager.Eat(thisUnit, chosen);
-
-        // on collision (call eat from unit mamager) (on collison end follow croutine)
-        // when eat wait 2-3 seconds 
-        // make a new decision
-
-
+        //when eat wait 2 - 3 seconds
         int counter = time;
         while (counter > 0)
         {
@@ -178,14 +214,44 @@ public class NpcController : MonoBehaviour
             counter--;
         }
 
-        Debug.Log("Just Ate 1 desired");
-        // logic to update hunger
+        //Debug.Log("chosen type: " + chosen + ", hCost: " + chosen.hierarchicalCost);
 
-        OnFinishedAction();
+        // set target cords to pathfinder
+        LocateTarget(chosen.location);
+        
+        // if at target? if not reset target cords
+        if (thisUnit.location != chosen.location) // cheap way, instead of using collision events
+        {
+            LocateTarget(chosen.location);
+        }
+
+        //unitManager.Eat(thisUnit, chosen);
+
+        // on collision (call eat from unit mamager) (on collison end follow croutine)
+
+        // make a new decision
+
+
+        if (hasCollided) 
+        {
+            //unitManager.Eat(thisUnit, collidedUnit);
+
+            //int counter = time;
+            //while (counter > 0)
+            //{
+            //    yield return new WaitForSeconds(1);
+            //    counter--;
+            //}
+
+            OnFinishedAction();
+        }
+        
     }
 
 
-    // IDLE ACTION
+    //---------------------//
+    //      Idle Action    //
+    //---------------------//
     public void DoIdle(int time)
     {
         // slowly move to nearby tile
@@ -300,10 +366,13 @@ public class NpcController : MonoBehaviour
 
     public void CalculateProximity()
     {
+        //desiredProx = null; // since it's already recalculating everytime the function is called, no harm in setting to null
+        //closestProx = null;
+
+        if (!spawner.groupSpawned) { Debug.Log("GroupSpawn needed for connections"); return; }
         //Debug.Log("Proximity Calc called");
         //Debug.Log("Co count: " + thisUnit.connections.Count);
         if (thisUnit.connections.Count == 0) { Debug.Log("connections empty");  return; } // abort early if empty
-
 
         foreach (Unit entry in thisUnit.connections)
         {
@@ -339,5 +408,7 @@ public class NpcController : MonoBehaviour
 
         closestProx = bestUnit;
         //Debug.Log("closest type: " + closestProx + ", hCost: " + closestProx.hierarchicalCost);
+
+        return;
     }
 }

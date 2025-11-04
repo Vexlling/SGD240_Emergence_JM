@@ -6,9 +6,6 @@ TagManager:
   tags:
   - Tile
   - Unit
-  - Spore
-  - cA
-  - cB
   layers:
   - Default
   - TransparentFX

@@ -13,12 +13,12 @@ public class EatDesired : Action
         Debug.Log("I'm going to desired");
 
         // execute action here
-        npc.DoEatDesired(1);
+        npc.DoEatDesired(3);
         
         
 
       
 
-        npc.OnFinishedAction();
+        //npc.OnFinishedAction(); // might be doubling  up
     }
 }

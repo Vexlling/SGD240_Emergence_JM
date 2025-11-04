@@ -12,9 +12,11 @@ public class Unit : MonoBehaviour
     public PrefabType type { get; private set; }
 
 
-    [SerializeField] private int nutritionalValue; 
+    [Range(1, 100)][SerializeField] private int nutritionalValue; 
     public int nValue { get; private set; }
 
+    // not tweakable
+    public GameObject body { get; private set; }
 
 
     // Fully public 
@@ -31,11 +33,12 @@ public class Unit : MonoBehaviour
     
     
 
-    public Unit(PrefabType type, int pips, Vector2Int location, int hCost, List<Unit> connections, int health, int hunger)
+    public Unit(PrefabType type, int pips, GameObject body, Vector2Int location, int hCost, List<Unit> connections, int health, int hunger)
     {
         // static
         this.type = type;
         this.nValue = pips;
+        this.body = body;
 
         // fluid
         this.location = location;
@@ -47,7 +50,7 @@ public class Unit : MonoBehaviour
 
     GridManager gridManager;
     UnitManager unitManager;
-    GameObject prefab;
+   // GameObject prefab;
 
     private void Start()
     {
@@ -58,7 +61,7 @@ public class Unit : MonoBehaviour
 
         gridManager = FindObjectOfType<GridManager>();
         unitManager = GetComponentInParent<UnitManager>();
-        prefab = GetComponent<GameObject>();
+        body = GetComponent<GameObject>();
 
 
         //CurrentLocation(); // moved to AddConnections function in UnitManager
@@ -82,9 +85,11 @@ public class Unit : MonoBehaviour
     private void UnitDeath() // has to be here because spore needs access to this
     {
         unitManager.RemoveConnection(this);
-        // might need something here for spawner
+
+        // RemoveEaten() in UnitManager handles spore positions for Spawner
+
         Debug.Log("unit " + this.type + " has died");
-        Destroy(prefab); // only this class will be able to destroy the prefab, other scripts can only set unit health to 0
+        Destroy(body); // only this class will be able to destroy the prefab, other scripts can only set unit health to 0
     }
 
 }
